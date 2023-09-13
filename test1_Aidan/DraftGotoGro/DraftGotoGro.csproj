@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="png-transparent-shopping-centre-computer-icons-online-shopping-mall-miscellaneous-cdr-angle.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="png-transparent-shopping-centre-computer-icons-online-shopping-mall-miscellaneous-cdr-angle.png" />
+  </ItemGroup>
+
 </Project>

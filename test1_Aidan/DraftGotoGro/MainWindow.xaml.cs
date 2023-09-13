@@ -50,7 +50,11 @@ namespace DraftGotoGro
             bool passwordCorrect = false;
 
             if (usernameBox.Text == "" || passwordBox.Password.ToString() == "")
+            {
+                usernameErrorLabel.Content = "Please enter a username and a password.";
+                usernameErrorLabel.Visibility = Visibility.Visible;
                 return;
+            }
 
             //Check types / sanitise inputs
             string pattern = "^[A-Z]{2}[a-z]{0,18}(?:\\d{2})?$"; //Two capital letters, 18 lowercase letters, optional 2-digit number
@@ -89,11 +93,11 @@ namespace DraftGotoGro
             if (usernameFound && passwordCorrect)
             {
                 //very good, do whatever needs to happen to log in.
-                Debug.WriteLine("login good");
+                SubmitButton.Content = "Login successful";
             }
             else
             {
-                Debug.WriteLine("Login bad");
+                SubmitButton.Content = "Login failed";
             }
         }
     }
