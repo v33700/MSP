@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 S:\Repos\ManagingSoftwareProjects\MSP\test1_Aidan\DraftGotoGro\App.xaml
-11407045341
+3-1291387519
 
-4-692758029
+61014725027
 194183970531
-MainWindow.xaml;
+EmployeeLogin.xaml;MainWindow.xaml;SalesInput.xaml;
 
 False
 

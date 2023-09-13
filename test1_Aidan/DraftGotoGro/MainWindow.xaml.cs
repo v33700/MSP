@@ -20,85 +20,17 @@ namespace DraftGotoGro
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
-        TextBox usernameBox;
-        PasswordBox passwordBox;
-        Button submitButton;
-
-        Label usernameErrorLabel;
-        Label noPasswordLabel;
-
-        List<Employee> employees = new List<Employee>();
+        //create all the pages
+        EmployeeLogin employeeLoginPage = new EmployeeLogin();
+        SalesInput salesInputPage = new SalesInput();
 
         public MainWindow()
         {
             InitializeComponent();
-            usernameBox = (TextBox)MainWin.FindName("UsernameBox");
-            passwordBox = (PasswordBox)MainWin.FindName("PasswordBox");
-            submitButton = (Button)MainWin.FindName("SubmitButton");
-            usernameErrorLabel = (Label)MainWin.FindName("UsernameErrorLabel");
-            noPasswordLabel = (Label)MainWin.FindName("NoPasswordLabel");
-
-
-            employees.Add(new Employee(1, "AGrimmett", "Aidan", "Grimmett", "Password1234", "103606838@student.swin.edu.au", "1234567890", new DateTime(2002, 07, 21)));
-        }
-
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
-        {
-            bool usernameFound = false;
-            bool passwordCorrect = false;
-
-            if (usernameBox.Text == "" || passwordBox.Password.ToString() == "")
-            {
-                usernameErrorLabel.Content = "Please enter a username and a password.";
-                usernameErrorLabel.Visibility = Visibility.Visible;
-                return;
-            }
-
-            //Check types / sanitise inputs
-            string pattern = "^[A-Z]{2}[a-z]{0,18}(?:\\d{2})?$"; //Two capital letters, 18 lowercase letters, optional 2-digit number
-            bool isMatch = Regex.IsMatch(usernameBox.Text, pattern);
-
-            if (!isMatch)
-            {
-                usernameErrorLabel.Content = "Username is not of a valid format. Please try again.";
-                usernameErrorLabel.Visibility = Visibility.Visible;
-                return;
-            }
-
-            //compare inputs with stored data
-            foreach (Employee em in employees)
-            {
-                usernameFound = (usernameBox.Text == em.username);
-
-                if (usernameFound)
-                {
-                    passwordCorrect = (passwordBox.Password.ToString() == em.password);
-                    continue;
-                }
-            }
-
-            //missing or incorrect data
-            if (!usernameFound)
-            {
-                usernameErrorLabel.Content = "No matching username found.";
-                usernameErrorLabel.Visibility = Visibility.Visible;
-            }
-            else if (!passwordCorrect)
-            {
-                NoPasswordLabel.Visibility = Visibility.Visible;
-            }
-
-            if (usernameFound && passwordCorrect)
-            {
-                //very good, do whatever needs to happen to log in.
-                SubmitButton.Content = "Login successful";
-            }
-            else
-            {
-                SubmitButton.Content = "Login failed";
-            }
+            MainFrame.Content = employeeLoginPage; //Change this to a homepage when we make it
         }
     }
 }

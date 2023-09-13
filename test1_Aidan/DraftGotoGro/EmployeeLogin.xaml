@@ -1,0 +1,27 @@
+﻿<Page x:Class="DraftGotoGro.EmployeeLogin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DraftGotoGro"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" d:Background="White"
+      Title="EmployeeLogin">
+
+    <Grid x:Name="MainGrid">
+        <TextBox x:Name="UsernameBox" Margin="100,0,400,264" TextWrapping="Wrap" Height="50" VerticalAlignment="Bottom"/>
+        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="175,0,0,66" VerticalAlignment="Bottom" Height="75" Width="150" Click="SubmitButton_Click" Visibility="Visible">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <PasswordBox x:Name="PasswordBox" Margin="100,0,400,184" VerticalAlignment="Bottom" AutomationProperties.HelpText="Enter password here." Password="" Height="26"/>
+        <TextBlock x:Name="UsernameLabel" HorizontalAlignment="Left" Margin="100,0,0,319" TextWrapping="Wrap" Text="Username" VerticalAlignment="Bottom" Foreground="#FF3E3E3E" Width="300"/>
+        <TextBlock x:Name="PasswordLabel" HorizontalAlignment="Left" Margin="100,0,0,223" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="#FF3E3E3E" Height="16" Width="300"><Run Language="en-au" Text="Password"/><LineBreak/><Run Language="en-au"/></TextBlock>
+        <Label x:Name="UsernameErrorLabel" Content="No matching username found" HorizontalAlignment="Left" Margin="422,112,0,0" VerticalAlignment="Top" IsEnabled="False" Background="White" Foreground="Red" Visibility="Hidden"/>
+        <Label x:Name="NoPasswordLabel" Content="Password incorrect&#xD;&#xA;" HorizontalAlignment="Left" Margin="422,0,0,0" VerticalAlignment="Center" Foreground="Red" Height="26" Visibility="Hidden"/>
+        <Image Margin="0,0,132,35" Source="/png-transparent-shopping-centre-computer-icons-online-shopping-mall-miscellaneous-cdr-angle.png" HorizontalAlignment="Right" Width="137" Height="137" VerticalAlignment="Bottom"/>
+        <Rectangle x:Name="HeaderBar" Height="74" Stroke="#FF65B5FF" VerticalAlignment="Top" Fill="#FF65B5FF" RenderTransformOrigin="0.5,0.5"/>
+        <TextBlock x:Name="TitleBlock" HorizontalAlignment="Center" Height="36" Margin="0,19,0,0" TextWrapping="Wrap" Text="Goto Grocery Member Management System" TextAlignment="Center" VerticalAlignment="Top" Width="642" FontFamily="Bahnschrift" FontSize="24"/>
+    </Grid>
+</Page>
