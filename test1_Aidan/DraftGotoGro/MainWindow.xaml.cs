@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace DraftGotoGro
 {
@@ -52,7 +53,15 @@ namespace DraftGotoGro
                 return;
 
             //Check types / sanitise inputs
+            string pattern = "^[A-Z]{2}[a-z]{0,18}(?:\\d{2})?$"; //Two capital letters, 18 lowercase letters, optional 2-digit number
+            bool isMatch = Regex.IsMatch(usernameBox.Text, pattern);
 
+            if (!isMatch)
+            {
+                usernameErrorLabel.Content = "Username is not of a valid format. Please try again.";
+                usernameErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
 
             //compare inputs with stored data
             foreach (Employee em in employees)
@@ -69,6 +78,7 @@ namespace DraftGotoGro
             //missing or incorrect data
             if (!usernameFound)
             {
+                usernameErrorLabel.Content = "No matching username found.";
                 usernameErrorLabel.Visibility = Visibility.Visible;
             }
             else if (!passwordCorrect)

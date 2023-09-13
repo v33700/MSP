@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\test1\\DraftGotoGro\\DraftGotoGro.csproj": {}
+    "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\test1\\DraftGotoGro\\DraftGotoGro.csproj": {
+    "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\test1\\DraftGotoGro\\DraftGotoGro.csproj",
+        "projectUniqueName": "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
         "projectName": "DraftGotoGro",
-        "projectPath": "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\test1\\DraftGotoGro\\DraftGotoGro.csproj",
+        "projectPath": "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
         "packagesPath": "C:\\Users\\aidsg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\test1\\DraftGotoGro\\obj\\",
+        "outputPath": "C:\\Users\\aidsg\\Documents\\Repos\\managingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
