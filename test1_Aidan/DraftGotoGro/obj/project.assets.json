@@ -8,23 +8,23 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\aidsg\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Varad\\.nuget\\packages\\": {},
+    "E:\\VisualStudio\\1\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "S:\\Repos\\ManagingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
+      "projectUniqueName": "C:\\Users\\Varad\\source\\repos\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
       "projectName": "DraftGotoGro",
-      "projectPath": "S:\\Repos\\ManagingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
-      "packagesPath": "C:\\Users\\aidsg\\.nuget\\packages\\",
-      "outputPath": "S:\\Repos\\ManagingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\obj\\",
+      "projectPath": "C:\\Users\\Varad\\source\\repos\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
+      "packagesPath": "C:\\Users\\Varad\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Varad\\source\\repos\\MSP\\test1_Aidan\\DraftGotoGro\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "E:\\VisualStudio\\1\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\aidsg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Varad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -33,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

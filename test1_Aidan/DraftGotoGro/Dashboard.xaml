@@ -1,0 +1,30 @@
+﻿<Page x:Class="DraftGotoGro.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DraftGotoGro"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" d:Background="White"
+      Title="Dashboard">
+
+    <Grid x:Name="MainGrid" Background="White">
+
+        <TextBlock x:Name="TitleBlock" 
+                   HorizontalAlignment="Center" 
+                   TextWrapping="Wrap" 
+                   Text="Dashboard" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Top" 
+                   Margin="0,10,0,0" />
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!-- Add navigation buttons -->
+            <Button Content="Member Page" Width="200" Height="40" Click="NavigateToMemberPage" Margin="0,10"/>
+            <!-- Add navigation buttons -->
+
+            <Button Content="Logout" Width="200" Height="40" Click="LogoutButton_Click" Margin="0,10"/>
+        </StackPanel>
+    </Grid>
+</Page>
