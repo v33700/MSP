@@ -1,1 +1,31 @@
-test1_Aidan/DraftGotoGro/MemberPage.xaml.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks
+namespace DraftGotoGro
+{
+    public class Employee
+    {
+        // Properties
+        public int employeeID { get; set; }
+        public string sales { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+        public DateTime birthday { get; set; }
+
+        // Constructor
+        public Employee(int ID, string Sales, string FirstName, string LastName, string Email, string Phone, DateTime Birthday)
+        {
+            employeeID = ID;
+            sales = Sales;
+            firstName = FirstName;
+            lastName = LastName;
+            email = Email;
+            phone = Phone;
+            birthday = Birthday;
+        }
+    }
+}
