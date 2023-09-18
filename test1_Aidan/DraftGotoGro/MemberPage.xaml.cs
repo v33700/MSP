@@ -21,8 +21,8 @@ namespace DraftGotoGro
         {
             var sampleData = new ObservableCollection<Member>
             {
-                new Member { Name = "John Doe", PhoneNumber = "123-456-7890", Address = "123 Main St" },
-                new Member { Name = "Jane Smith", PhoneNumber = "987-654-3210", Address = "456 Elm St" }
+                new Member { Id = 1, Name = "John Doe", PhoneNumber = "123-456-7890", Address = "123 Main St" },
+                new Member { Id = 2, Name = "Jane Smith", PhoneNumber = "987-654-3210", Address = "456 Elm St" }
             };
 
             MemberDataGrid.ItemsSource = sampleData;
@@ -54,6 +54,8 @@ namespace DraftGotoGro
             removeButton.Visibility = Visibility.Collapsed;
             cancelButton.Visibility = Visibility.Visible;
             saveButton.Visibility = Visibility.Visible;
+
+            // Update Button Logic
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -70,6 +72,8 @@ namespace DraftGotoGro
             removeButton.Visibility = Visibility.Visible;
             cancelButton.Visibility = Visibility.Collapsed;
             saveButton.Visibility = Visibility.Collapsed;
+
+            // Cancel button logic
         }
 
 
@@ -103,6 +107,7 @@ namespace DraftGotoGro
 
     public class Member // This is your member model class
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }

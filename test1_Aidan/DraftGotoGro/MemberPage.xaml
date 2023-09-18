@@ -48,12 +48,15 @@
                 Click="AddButton_Click"/>
 
         <DataGrid x:Name="MemberDataGrid" 
-                  AutoGenerateColumns="False" 
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch" 
-                  Margin="20,100,20,20">
+          AutoGenerateColumns="False" 
+          HorizontalAlignment="Stretch" 
+          VerticalAlignment="Stretch" 
+          Margin="20,100,20,20">
 
             <DataGrid.Columns>
+                <!-- New ID column -->
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" Width="*"/>
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="*"/>
@@ -77,5 +80,6 @@
             </DataGrid.Columns>
 
         </DataGrid>
+
     </Grid>
 </Page>
