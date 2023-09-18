@@ -5,10 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DraftGotoGro"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800" d:Background="White"
       Title="SalesInput">
 
-    <Grid>
-        
+
+    <Grid x:Name="MainGrid">
+        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="175,0,0,66" VerticalAlignment="Bottom" Height="75" Width="150" Click="SubmitButton_Click" Visibility="Visible">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Label x:Name="UsernameErrorLabel" Content="No matching username found" HorizontalAlignment="Left" Margin="422,112,0,0" VerticalAlignment="Top" IsEnabled="False" Background="White" Foreground="Red" Visibility="Hidden"/>
+        <Label x:Name="NoPasswordLabel" Content="Password incorrect&#xD;&#xA;" HorizontalAlignment="Left" Margin="422,0,0,0" VerticalAlignment="Center" Foreground="Red" Height="26" Visibility="Hidden"/>
+        <Rectangle x:Name="HeaderBar" Height="74" Stroke="#FF65B5FF" VerticalAlignment="Top" Fill="#FF65B5FF" RenderTransformOrigin="0.5,0.5"/>
+        <TextBlock x:Name="TitleBlock" HorizontalAlignment="Center" Height="36" Margin="0,19,0,0" TextWrapping="Wrap" Text="Goto Grocery Member Management System" TextAlignment="Center" VerticalAlignment="Top" Width="642" FontFamily="Bahnschrift" FontSize="24"/>
     </Grid>
 </Page>
