@@ -2,30 +2,67 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks
+using System.Threading.Tasks;
+using system.IO;
+
 namespace DraftGotoGro
 {
     public class Employee
     {
-        // Properties
-        public int employeeID { get; set; }
-        public string sales { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string email { get; set; }
-        public string phone { get; set; }
-        public DateTime birthday { get; set; }
+        /*  // Properties
+          public int employeeID { get; set; }
+          public string username { get; set; }
+          public string firstName { get; set; }
+          public string lastName { get; set; }
+          public string password { get; set; }
+          public string email { get; set; }
+          public string phone { get; set; }
+          public DateTime birthday { get; set; }
 
-        // Constructor
-        public Employee(int ID, string Sales, string FirstName, string LastName, string Email, string Phone, DateTime Birthday)
+          // Constructor
+          public Employee(int ID, string Username, string FirstName, string LastName, string Password, string Email, string Phone, DateTime Birthday)
+          {
+              employeeID = ID;
+              username = Username;
+              firstName = FirstName;
+              lastName = LastName;
+              password = Password;
+              email = Email;
+              phone = Phone;
+              birthday = Birthday;
+          } */
+        static void main()
         {
-            employeeID = ID;
-            sales = Sales;
-            firstName = FirstName;
-            lastName = LastName;
-            email = Email;
-            phone = Phone;
-            birthday = Birthday;
+            //Defining csv file name 
+            string filename = "Employee.csv";
+            //creating list of data to write in csv file 
+            List<string[]> data = new List<string[]>
+            {
+            new string []{"ID","Username","FirstName","LastName","Password","Email", "phone","Birthday" },
+            new string []{"10001","Geraldine.O.F","Geraldine","Flynn","10001Geraldine","daniella1973@gmail.com","4128418390","19/06/1986"},
+            new string []{"10002","Kyle.K.H","Kyle","Heikkinen","10002Kyle", "natalia1981@gmail.com", "615-200-9623","29/8/1965" },
+            new string []{"10003","Frank.J.H","Frank","Hartung","10003Frank", "tamara2009@gmail.com", "361-510-9067","10/1/1972" },
+            new string []{"10004","Viola.J.C","Viola","Cofer","10004Viola", "trace_orn1986@yahoo.com", "302-981-0391","3/9/1977" },
+            };
+            try
+            {
+                //create a streamwriter to write to the csv file
+                using (StreamWriter sw = new StreamWriter(filename))
+                {
+
+                    foreach (string[] row in data)
+                    {
+                        //joining the data on the same row and  write to the file 
+                        sw.WriteLine(string.Join(",", row));
+                    }
+                }
+                Console.WriteLine("CSV file'" + filename + "'has been created.");
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred while creating the CSV file: " + e.Message);x`
+            }
         }
+
     }
 }
