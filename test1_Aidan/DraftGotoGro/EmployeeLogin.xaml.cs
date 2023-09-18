@@ -40,7 +40,7 @@ namespace DraftGotoGro
             noPasswordLabel = (Label)MainGrid.FindName("NoPasswordLabel");
 
 
-            employees.Add(new Employee(1, "AGrimmett", "Aidan", "Grimmett", "Password1234", "103606838@student.swin.edu.au", "1234567890", new DateTime(2002, 07, 21)));
+            employees.Add(new Employee(1, "AGrimmett", "Aidan", "Grimmett", "Password1234", "123456789@student.swin.edu.au", "1234567890", new DateTime(2000, 01, 01)));
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)

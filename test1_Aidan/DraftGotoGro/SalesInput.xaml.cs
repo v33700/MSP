@@ -24,5 +24,19 @@ namespace DraftGotoGro
         {
             InitializeComponent();
         }
+
+        private void AddToOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Check that the item ID and Quantity boxes are pupulated and valid
+
+            //add item ID and Quantity to the listview
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Check there is a valid member ID 
+
+            //Submit the order to the database
+        }
     }
 }
