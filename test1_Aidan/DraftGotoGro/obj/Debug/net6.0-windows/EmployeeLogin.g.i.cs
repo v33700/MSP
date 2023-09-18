@@ -133,7 +133,7 @@ namespace DraftGotoGro {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DraftGotoGro;component/employeelogin.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DraftGotoGro;V1.0.0.0;component/employeelogin.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\EmployeeLogin.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
