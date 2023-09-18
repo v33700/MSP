@@ -8,13 +8,13 @@ namespace DraftGotoGro
 {
     public class Database
     {
-        private string _connection;
+        private string _connectionString;
 
-        public string Conn { get { return _connection; } }
+        public string Conn { get { return _connectionString; } }
 
         Database(string connection) 
         {
-            _connection = connection;
+            _connectionString = connection;
         }
 
     }
