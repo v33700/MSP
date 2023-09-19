@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,20 +23,17 @@ namespace DraftGotoGro
         public SalesInput()
         {
             InitializeComponent();
+
         }
-
-        private void AddToOrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Check that the item ID and Quantity boxes are pupulated and valid
-
-            //add item ID and Quantity to the listview
-        }
-
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            //Check there is a valid member ID 
-
-            //Submit the order to the database
+            if (MemberIDBox.Text == "" || OrderNumber.Text == "" || ItemID.Text == "" || ItemQuantity.Text == "");
+            {
+                SaleErrorLabel.Content = "Please fill all the data.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
         }
-    }
+
+
 }
