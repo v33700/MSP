@@ -8,19 +8,24 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\jacfo\\.nuget\\packages\\": {}
+    "C:\\Users\\nprez\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jacfo\\Desktop\\test\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
+      "projectUniqueName": "C:\\Users\\nprez\\Source\\Repos\\MSP2\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
       "projectName": "DraftGotoGro",
-      "projectPath": "C:\\Users\\jacfo\\Desktop\\test\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
-      "packagesPath": "C:\\Users\\jacfo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jacfo\\Desktop\\test\\test1_Aidan\\DraftGotoGro\\obj\\",
+      "projectPath": "C:\\Users\\nprez\\Source\\Repos\\MSP2\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
+      "packagesPath": "C:\\Users\\nprez\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nprez\\Source\\Repos\\MSP2\\test1_Aidan\\DraftGotoGro\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\jacfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nprez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -28,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -64,7 +70,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
