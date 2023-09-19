@@ -9,7 +9,7 @@
       Title="SalesInput">
 
     <Grid x:Name="MainGrid">
-        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Center" Margin="0,336,0,0" VerticalAlignment="Top" Height="75" Width="150" Click="SubmitButton_Click" Visibility="Visible">
+        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="123,345,0,0" VerticalAlignment="Top" Height="75" Width="150" Click="SubmitButton_Click" Visibility="Visible">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -18,6 +18,7 @@
         <Label x:Name="NoPasswordLabel" Content="Password incorrect&#xD;&#xA;" HorizontalAlignment="Left" Margin="422,0,0,0" VerticalAlignment="Center" Foreground="Red" Height="26" Visibility="Hidden"/>
         <Rectangle x:Name="HeaderBar" Height="74" Stroke="#FF65B5FF" VerticalAlignment="Top" Fill="#FF65B5FF" RenderTransformOrigin="0.5,0.5"/>
         <TextBlock x:Name="TitleBlock" HorizontalAlignment="Center" Height="36" Margin="0,19,0,0" TextWrapping="Wrap" Text="Goto Grocery Member Management System" TextAlignment="Center" VerticalAlignment="Top" Width="642" FontFamily="Bahnschrift" FontSize="24"/>
+
         <TextBox x:Name="MemberIDBox" HorizontalAlignment="Left" Margin="56,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="MemberIDBox_TextChanged"/>
         <TextBox x:Name="OrderNumber" HorizontalAlignment="Left" Margin="56,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="ItemID" HorizontalAlignment="Left" Margin="56,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -27,5 +28,17 @@
         <Label x:Name="ItemIDBox" Content="Item ID&#xD;&#xA;" HorizontalAlignment="Left" Margin="56,184,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
         <Label x:Name="ItemQuantityLabel" Content="Item Quantity" HorizontalAlignment="Left" Margin="56,235,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
         <Label x:Name="SaleErrorLabel" Content="Enter a valid data" HorizontalAlignment="Left" Margin="422,112,0,0" VerticalAlignment="Top" IsEnabled="False" Background="White" Foreground="Red" Visibility="Hidden"/>
+
+       
+        <ListView x:Name="ItemListView" Margin="422,152,73,112">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="150" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Quantity" Width="150" DisplayMemberBinding="{Binding Quantity}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="AddToOrderButton" Content="Add" HorizontalAlignment="Left" Margin="321,230,0,0" VerticalAlignment="Top" Height="30" Width="40" Click="AddToOrderButton_Click"/>
+
     </Grid>
 </Page>

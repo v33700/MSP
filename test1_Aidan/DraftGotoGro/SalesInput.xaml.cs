@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +23,17 @@ namespace DraftGotoGro
         public SalesInput()
         {
             InitializeComponent();
+
         }
-    }
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MemberIDBox.Text == "" || OrderNumber.Text == "" || ItemID.Text == "" || ItemQuantity.Text == "");
+            {
+                SaleErrorLabel.Content = "Please fill all the data.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
+        }
+
+
 }

@@ -92,3 +92,7 @@ C:\Users\Varad\source\repos\MSP\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-window
 C:\Users\Varad\source\repos\MSP\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\ref\DraftGotoGro.dll
 C:\Users\Varad\source\repos\MSP\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\Dashboard.g.cs
 C:\Users\Varad\source\repos\MSP\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\Dashboard.baml
+S:\Repos\ManagingSoftwareProjects\MSP\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\Dashboard.g.cs
+S:\Repos\ManagingSoftwareProjects\MSP\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\MemberPage.g.cs
+S:\Repos\ManagingSoftwareProjects\MSP\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\Dashboard.baml
+S:\Repos\ManagingSoftwareProjects\MSP\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\MemberPage.baml
