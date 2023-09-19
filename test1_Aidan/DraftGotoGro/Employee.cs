@@ -8,7 +8,7 @@ namespace DraftGotoGro
 {
     public class Employee
     {
-        // Properties
+        //Properties
         public int employeeID { get; set; }
         public string username { get; set; }
         public string firstName { get; set; }
