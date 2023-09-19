@@ -15,7 +15,7 @@ namespace DraftGotoGro
         {
             InitializeComponent();
 
-            var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string 
+            var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
             _database = client.GetDatabase("SWE"); // database name
             _collection = _database.GetCollection<Member>("Members");
         }
@@ -24,6 +24,7 @@ namespace DraftGotoGro
     private void Page_Loaded(object sender, RoutedEventArgs e)
     {
         LoadMembersFromDb();
+        // Delete bellow as its test data
         LoadSampleData();
     }
     private void LoadMembersFromDb()
@@ -33,6 +34,7 @@ namespace DraftGotoGro
     }
     private void LoadSampleData()
     {
+        //this function is for test only
         var sampleData = new ObservableCollection<Member>
             {
                 new Member { Id = 1, Name = "John Doe", PhoneNumber = "123-456-7890", Address = "123 Main St" },
