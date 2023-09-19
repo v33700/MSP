@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace DraftGotoGro
 {
-    /// <summary>
+    ///  <summary>
     /// Interaction logic for SalesInput.xaml
-    /// </summary>
+    ///  </summary>
     public partial class SalesInput : Page
     {
         public SalesInput()
