@@ -27,5 +27,11 @@ namespace DraftGotoGro
             EmployeeLogin employeeLoginPage = new EmployeeLogin(myParent);
             myParent.Content = employeeLoginPage;
         }
+
+        private void NavigateToSalesInputPage(object sender, RoutedEventArgs e)
+        {
+            SalesInput salesInput = new SalesInput(myParent);
+            myParent.Content = salesInput;
+        }
     }
 }

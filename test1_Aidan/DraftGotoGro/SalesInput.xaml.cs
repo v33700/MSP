@@ -21,10 +21,11 @@ namespace DraftGotoGro
     /// </summary>
     public partial class SalesInput : Page
     {
-        public SalesInput()
+        MainWindow myParent;
+        public SalesInput(MainWindow win)
         {
             InitializeComponent();
-
+            myParent = win;
         }
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -66,6 +67,12 @@ namespace DraftGotoGro
                 SaleErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
+        }
+
+        private void NavigateToDashboard(object sender, RoutedEventArgs e)
+        {
+            DashboardPage dash = new DashboardPage(myParent);
+            myParent.Content = dash;
         }
     }
 

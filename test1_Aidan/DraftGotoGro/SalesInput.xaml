@@ -16,8 +16,6 @@
         </Button>
         <Label x:Name="UsernameErrorLabel" Content="No matching username found" HorizontalAlignment="Left" Margin="422,112,0,0" VerticalAlignment="Top" IsEnabled="False" Background="White" Foreground="Red" Visibility="Hidden"/>
         <Label x:Name="NoPasswordLabel" Content="Password incorrect&#xD;&#xA;" HorizontalAlignment="Left" Margin="422,0,0,0" VerticalAlignment="Center" Foreground="Red" Height="26" Visibility="Hidden"/>
-        <Rectangle x:Name="HeaderBar" Height="74" Stroke="#FF65B5FF" VerticalAlignment="Top" Fill="#FF65B5FF" RenderTransformOrigin="0.5,0.5"/>
-        <TextBlock x:Name="TitleBlock" HorizontalAlignment="Center" Height="36" Margin="0,19,0,0" TextWrapping="Wrap" Text="Goto Grocery Member Management System" TextAlignment="Center" VerticalAlignment="Top" Width="642" FontFamily="Bahnschrift" FontSize="24"/>
 
         <TextBox x:Name="MemberIDBox" HorizontalAlignment="Left" Margin="56,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="OrderNumber" HorizontalAlignment="Left" Margin="56,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -39,6 +37,19 @@
             </ListView.View>
         </ListView>
         <Button x:Name="AddToOrderButton" Content="Add" HorizontalAlignment="Left" Margin="321,230,0,0" VerticalAlignment="Top" Height="30" Width="40"/>
-
+        <Button Content="Dashboard" Click="NavigateToDashboard" Width="100" Margin="350,58,350,369" Background="Transparent" BorderBrush="Transparent">
+            <!-- MouseOver effect for Button -->
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Page>
