@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\nprez\source\repos\MSP2\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\
+C:\Users\jacfo\Desktop\SPRINT\test1_Aidan\DraftGotoGro\obj\Debug\net6.0-windows\
 DraftGotoGro
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\nprez\source\repos\MSP2\test1_Aidan\DraftGotoGro\App.xaml
-5-1917236776
+C:\Users\jacfo\Desktop\SPRINT\test1_Aidan\DraftGotoGro\App.xaml
+5-961419419
 
-11539055648
-194-1103864946
-Dashboard.xaml;EmployeeLogin.xaml;MainWindow.xaml;MemberPage.xaml;SalesInput.xaml;
+12370105595
+194101785492
+Dashboard.xaml;MainWindow.xaml;Pages\EmployeeLogin.xaml;Pages\MemberPage.xaml;Pages\SalesInput.xaml;
 
 False
 

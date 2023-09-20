@@ -10,13 +10,13 @@
     <Compile Update="Dashboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="EmployeeLogin.xaml.cs">
+    <Compile Update="Pages\EmployeeLogin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MemberPage.xaml.cs">
+    <Compile Update="Pages\MemberPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="SalesInput.xaml.cs">
+    <Compile Update="Pages\SalesInput.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -24,16 +24,16 @@
     <Page Update="Dashboard.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="EmployeeLogin.xaml">
+    <Page Update="Pages\EmployeeLogin.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MemberPage.xaml">
+    <Page Update="Pages\MemberPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="SalesInput.xaml">
+    <Page Update="Pages\SalesInput.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
