@@ -24,13 +24,15 @@ namespace DraftGotoGro
     public partial class MainWindow : Window
     {
         //create all the pages
-        EmployeeLogin employeeLoginPage = new EmployeeLogin();
-        SalesInput salesInputPage = new SalesInput();
+        //EmployeeLogin employeeLoginPage = new EmployeeLogin();
+        //SalesInput salesInputPage = new SalesInput();
+        //MemberPage editMemberPage = new MemberPage();
 
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Content = employeeLoginPage; //Change this to a homepage when we make it
+            EmployeeLogin employeeLoginPage = new EmployeeLogin(this);
+            this.Content = employeeLoginPage; //Change this to a homepage when we make it
         }
     }
 }
