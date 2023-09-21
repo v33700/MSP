@@ -1,12 +1,17 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows;
+using System.Diagnostics;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace DraftGotoGro
 {
     public partial class MemberPage : Page
     {
         MainWindow myParent;
+        private IMongoDatabase _database;
+        private IMongoCollection<Member> _collection;
 
         public MemberPage(MainWindow win)
         {
@@ -16,26 +21,21 @@ namespace DraftGotoGro
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // Sample Data Loading
-            LoadSampleData();
+            var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
+            _database = client.GetDatabase("SWE"); // database name
+            _collection = _database.GetCollection<Member>("Members");
+            
+            LoadMembersFromDb();
         }
 
-        private void LoadSampleData()
+        private void LoadMembersFromDb()
         {
-            var sampleData = new ObservableCollection<Member>
-            {
-                new Member { Id = 1, Name = "John Doe", PhoneNumber = "123-456-7890", Address = "123 Main St" },
-                new Member { Id = 2, Name = "Jane Smith", PhoneNumber = "987-654-3210", Address = "456 Elm St" }
-            };
-
-            MemberDataGrid.ItemsSource = sampleData;
+            var members = _collection.Find(_ => true).ToList(); // Retrieve all members from the database
+            MemberDataGrid.ItemsSource = new ObservableCollection<Member>(members);
         }
 
         private void NavigateToDashboard(object sender, RoutedEventArgs e)
         {
-            // Navigate to the DashboardPage
-            //NavigationService.Navigate(new DashboardPage(myParent));
-
             DashboardPage dash = new DashboardPage(myParent);
             myParent.Content = dash;
         }
@@ -43,7 +43,7 @@ namespace DraftGotoGro
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            // Your logic for adding a new member goes here.
+            (MemberDataGrid.ItemsSource as ObservableCollection<Member>).Add(new Member() {Id = MemberDataGrid.Items.Count });
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
@@ -61,7 +61,6 @@ namespace DraftGotoGro
             cancelButton.Visibility = Visibility.Visible;
             saveButton.Visibility = Visibility.Visible;
 
-            // Update Button Logic
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -79,7 +78,6 @@ namespace DraftGotoGro
             cancelButton.Visibility = Visibility.Collapsed;
             saveButton.Visibility = Visibility.Collapsed;
 
-            // Cancel button logic
         }
 
 
@@ -95,19 +93,61 @@ namespace DraftGotoGro
 
             var member = button.Tag as Member; // This is your member object
 
-            // Save logic here
-
             updateButton.Visibility = Visibility.Visible;
             removeButton.Visibility = Visibility.Visible;
             cancelButton.Visibility = Visibility.Collapsed;
             saveButton.Visibility = Visibility.Collapsed;
-        }
 
-        // Continue with other methods like RemoveButton_Click
+            if (member != null)
+            {
+                SaveOrUpdateMember(member);
+            }
+            else
+            {
+                MessageBox.Show("No member information provided.");
+            }
+
+        }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Remove logic here
+            if (MemberDataGrid.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No member selected!");
+                return;
+            }
+
+            var selectedMember = MemberDataGrid.SelectedItem as Member;
+
+            if (selectedMember != null)
+            {
+                var filter = Builders<Member>.Filter.Eq(m => m.Id, selectedMember.Id);
+                _collection.DeleteOne(filter);
+                (MemberDataGrid.ItemsSource as ObservableCollection<Member>).Remove(selectedMember);
+            }
         }
+
+        public void SaveOrUpdateMember(Member member)
+        {
+            var filter = Builders<Member>.Filter.Eq(m => m.Id, member.Id);
+
+            // Check if a member with the given ID already exists
+            var existingMember = _collection.Find(filter).FirstOrDefault();
+
+            if (existingMember != null)
+            {
+                var update = Builders<Member>.Update
+                    .Set(m => m.Name, member.Name)
+                    .Set(m => m.PhoneNumber, member.PhoneNumber)
+                    .Set(m => m.Address, member.Address);
+
+                _collection.UpdateOne(filter, update);
+            }
+            else
+            {
+                _collection.InsertOne(member);
+            }
+        }
+
     }
 }
