@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="png-transparent-shopping-centre-computer-icons-online-shopping-mall-miscellaneous-cdr-angle.png" />
   </ItemGroup>
 

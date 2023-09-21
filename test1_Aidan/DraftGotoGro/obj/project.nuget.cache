@@ -1,8 +1,27 @@
 {
   "version": 2,
-  "dgSpecHash": "pF3/nsw7usfeuyROX6HHyVG60Rojp15QAI80cM8f3sah2i/6Mmo2JyqJID37xoEIpCwYo8PLmJyp1wEL/ssb0A==",
+  "dgSpecHash": "fBAngex9dND8yerIio7L5lyW8Saf/CEXFgcIKFNTDKmF+58STEjH9aIrUIWqCVf9zzwlmSVhRn/hFj89L6FAOw==",
   "success": true,
-  "projectFilePath": "S:\\Repos\\ManagingSoftwareProjects\\MSP\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\jacfo\\Desktop\\sprite\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jacfo\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.0.0\\microsoft.extensions.logging.abstractions.2.0.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\mongodb.bson\\2.21.0\\mongodb.bson.2.21.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\mongodb.driver\\2.21.0\\mongodb.driver.2.21.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\mongodb.driver.core\\2.21.0\\mongodb.driver.core.2.21.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\mongodb.libmongocrypt\\1.8.0\\mongodb.libmongocrypt.1.8.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\sharpcompress\\0.30.1\\sharpcompress.0.30.1.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\snappier\\1.0.0\\snappier.1.0.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
+    "C:\\Users\\jacfo\\.nuget\\packages\\zstdsharp.port\\0.6.2\\zstdsharp.port.0.6.2.nupkg.sha512"
+  ],
   "logs": []
 }
