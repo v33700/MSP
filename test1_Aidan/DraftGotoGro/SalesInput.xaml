@@ -9,7 +9,7 @@
       Title="SalesInput">
 
     <Grid x:Name="MainGrid">
-        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="123,345,0,0" VerticalAlignment="Top" Height="75" Width="150" Click="SubmitButton_Click" Visibility="Visible">
+        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="56,313,0,0" Width="120" Click="SubmitButton_Click" Visibility="Visible" Height="49" VerticalAlignment="Top">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -27,8 +27,8 @@
         <Label x:Name="ItemQuantityLabel" Content="Item Quantity" HorizontalAlignment="Left" Margin="56,235,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
         <Label x:Name="SaleErrorLabel" Content="Enter a valid data" HorizontalAlignment="Left" Margin="422,112,0,0" VerticalAlignment="Top" IsEnabled="False" Background="White" Foreground="Red" Visibility="Hidden"/>
 
-       
-        <ListView x:Name="ItemListView" Margin="422,152,73,112">
+
+        <ListView x:Name="ItemListView" Margin="422,152,0,112" HorizontalAlignment="Left" Width="305">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="150" DisplayMemberBinding="{Binding ID}" />
@@ -37,7 +37,7 @@
             </ListView.View>
         </ListView>
         <Button x:Name="AddToOrderButton" Content="Add" HorizontalAlignment="Left" Margin="321,230,0,0" VerticalAlignment="Top" Height="30" Width="40"/>
-        <Button Content="Dashboard" Click="NavigateToDashboard" Width="100" Margin="350,58,350,369" Background="Transparent" BorderBrush="Transparent">
+        <Button Content="Dashboard" Click="NavigateToDashboard" Width="100" Margin="350,58,0,0" Background="AliceBlue" BorderBrush="Black" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left">
             <!-- MouseOver effect for Button -->
             <Button.Style>
                 <Style TargetType="Button">
