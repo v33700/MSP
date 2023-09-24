@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\test1_Aidan",
+    "\\test1_Aidan\\DraftGotoGro",
+    "\\test1_Aidan\\DraftGotoGro\\obj",
+    "\\test1_Aidan\\DraftGotoGro\\obj\\Release"
   ],
-  "SelectedNode": "\\DraftGotoGro.sln (test1_Aidan\\DraftGotoGro\\Backup\\DraftGotoGro.sln)",
+  "SelectedNode": "\\test1_Aidan\\DraftGotoGro\\DraftGotoGro.sln",
   "PreviewInSolutionExplorer": false
 }

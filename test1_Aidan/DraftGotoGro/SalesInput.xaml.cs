@@ -24,5 +24,71 @@ namespace DraftGotoGro
         {
             InitializeComponent();
         }
+
+        private void Page_loaded(object sender, RoutedEventArgs e)
+        {
+            LoadSampData();
+        }
+
+        private void LoadSampData()
+        {
+            var sampData = new ObservableCollection<SalesData>
+            {
+            new SalesData { Name = "Pringles", Price = "$5", Quantity = "10" },
+            new SalesData { Name = "Milk", Price = "$3", Quantity = "15"}
+            }
+            SalesDataGrid.ItemSource = sampData;
+        }
+
+        private void NavigateToDashboard(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new DashboardPage());
+        }
+
+        private void Save_Button(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var parent = control.Parent as stackpanel;
+
+            var Saveclickbutton = parent.Children[0] as button;
+            var Cancelclickbutton = parent.Children[1] as button;
+            var removeclickbutton = parent.Children[2] as button;
+
+            Saveclickbutton.Visibility = Visibility.Visible;
+            Cancelclickbutton.Visibility = Visibility.Visible;
+        }
+
+        private void Cancel_Button(object sender RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var parent = control.Parent as stackpanel;
+
+            var Saveclickbutton = parent.Children[0] as button;
+            var Cancelclickbutton = parent.Children[1] as button;
+            var removeclickbutton = parent.Children[2] as button;
+
+            Saveclickbutton.Visibility = Visibility.Visible;
+            Cancelclickbutton.Visibility = Visibility.Visible;
+        }
+        private voide Remove_Button(object sender RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var parent = control.Parent as stackpanel;
+
+            var Saveclickbutton = parent.Children[0] as button;
+            var Cancelclickbutton = parent.Children[1] as button;
+            var removeclickbutton = parent.Children[2] as button;
+
+            Saveclickbutton.Visibility = Visibility.Visible;
+            Cancelclickbutton.Visibility = Visibility.Visible;
+        }
+    }
+
+    public class SalesData
+    {
+        public string Name { get; set; }
+        public string Price { get; set; }
+        pubic int Quantity { get; set; }
     }
 }
+

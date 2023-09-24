@@ -8,16 +8,69 @@
       d:DesignHeight="450" d:DesignWidth="800" d:Background="White"
       Title="SalesInput">
 
+	<Grid x:Name="MainGrid" Background="White">
 
-    <Grid x:Name="MainGrid">
-        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="175,0,0,66" VerticalAlignment="Bottom" Height="75" Width="150" Click="SubmitButton_Click" Visibility="Visible">
-            <Button.Effect>
-                <DropShadowEffect/>
-            </Button.Effect>
-        </Button>
-        <Label x:Name="UsernameErrorLabel" Content="No matching username found" HorizontalAlignment="Left" Margin="422,112,0,0" VerticalAlignment="Top" IsEnabled="False" Background="White" Foreground="Red" Visibility="Hidden"/>
-        <Label x:Name="NoPasswordLabel" Content="Password incorrect&#xD;&#xA;" HorizontalAlignment="Left" Margin="422,0,0,0" VerticalAlignment="Center" Foreground="Red" Height="26" Visibility="Hidden"/>
-        <Rectangle x:Name="HeaderBar" Height="74" Stroke="#FF65B5FF" VerticalAlignment="Top" Fill="#FF65B5FF" RenderTransformOrigin="0.5,0.5"/>
-        <TextBlock x:Name="TitleBlock" HorizontalAlignment="Center" Height="36" Margin="0,19,0,0" TextWrapping="Wrap" Text="Goto Grocery Member Management System" TextAlignment="Center" VerticalAlignment="Top" Width="642" FontFamily="Bahnschrift" FontSize="24"/>
-    </Grid>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Background="White">
+			<Button Content="Dashboard" Click="NavigateToDashboard" Width="100" Margin="0,0,10,0" Background="Transparent" BorderBrush="Transparent">
+				<Button.Style>
+					<Style TargetType="Button">
+						<Setter Property="Foreground" Value="Black"/>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Background" Value="White"/>
+								<Setter Property="Foreground" Value="Black"/>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+			</Button>
+		</StackPanel>
+
+		<TextBlock x:Name="TitleBlock"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap"
+                   Text="Sales Details"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   VerticalAlignment="Top"
+                   Margin="0,50,0,0" />
+
+		<Button x:Name="AddButton"
+                Content="Add"
+                HorizontalAlignment="Right"
+                Margin="0,50,20,0"
+                VerticalAlignment="Top"
+                Width="100"
+                Height="40"
+                Click="AddButton_Click"/>
+
+		<DataGrid x:Name="SalesrDataGrid"
+          AutoGenerateColumns="False"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch"
+          Margin="20,100,20,20">
+
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Name of product" Binding="{Binding Nameof product}" Width="Auto"/>
+
+				<DataGridTextColumn Header="Price" Binding="{Binding price}" Width="*"/>
+				<DataGridTextColumn Header="Quantity" Binding="{Quantity}" Width="*"/>
+
+				<DataGridTemplateColumn Width="Auto">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+								<Button Content="Remove" Click="RemoveButton_Click" Tag="{Binding}" Width="80" Margin="10,0,0,0"/>
+								<Button Content="Cancel" Click="CancelButton_Click" Tag="{Binding}" Width="80" Visibility="Collapsed" Name="CancelBtn"/>
+								<Button Content="Save" Click="SaveButton_Click" Tag="{Binding}" Width="80" Margin="10,0,0,0" Visibility="Collapsed" Name="SaveBtn"/>
+							</StackPanel>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+			</DataGrid.Columns>
+
+		</DataGrid>
+
+	</Grid>
 </Page>
