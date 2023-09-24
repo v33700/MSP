@@ -21,10 +21,20 @@ namespace DraftGotoGro
     /// </summary>
     public partial class SalesInput : Page
     {
+        TextBox MemberIDBox, OrderNumber, ItemID, ItemQuantity;
+        Button SubmitButton;
+        Label SaleErrorLabel;
         MainWindow myParent;
         public SalesInput(MainWindow win)
         {
             InitializeComponent();
+            MemberIDBox = (TextBox)MainGrid.FindName("MemberIDBox");
+            OrderNumber = (TextBox)MainGrid.FindName("OrderNumber");
+            SubmitButton = (Button)MainGrid.FindName("AddToOrderButton");
+            SaleErrorLabel = (Label)MainGrid.FindName("SaleErrorLabel");
+            ItemID = (TextBox)MainGrid.FindName("ItemID");
+            ItemQuantity = (TextBox)MainGrid.FindName("ItemQuantity");
+
             myParent = win;
         }
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
