@@ -1,88 +1,142 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using static MongoDB.Bson.Serialization.Serializers.SerializerHelper;
+
 
 namespace DraftGotoGro
 {
-    /// <summary>
-    /// Interaction logic for SalesInput.xaml
-    /// </summary>
     public partial class SalesInput : Page
     {
-        TextBox memberIDBox, orderNumber, itemID, itemQuantity;
-        Button submitButton;
-        Label saleErrorLabel;
         MainWindow myParent;
+        List<Item> itemList = new List<Item>();  
+
+        private IMongoDatabase _database;
+        private IMongoCollection<Sale> _collection;
+
         public SalesInput(MainWindow win)
         {
             InitializeComponent();
-            memberIDBox = (TextBox)MainGrid.FindName("MemberIDBox");
-            orderNumber = (TextBox)MainGrid.FindName("OrderNumber");
-            submitButton = (Button)MainGrid.FindName("AddToOrderButton");
-            saleErrorLabel = (Label)MainGrid.FindName("SaleErrorLabel");
-            itemID = (TextBox)MainGrid.FindName("ItemID");
-            itemQuantity = (TextBox)MainGrid.FindName("ItemQuantity");
-
             myParent = win;
+
+            var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
+            _database = client.GetDatabase("SWE"); // database name
+            _collection = _database.GetCollection<Sale>("Sales");
         }
         private void SubmitButtons(object sender, RoutedEventArgs e)
         {
-            if (memberIDBox.Text == "" || orderNumber.Text == "" || itemID.Text == "" || itemQuantity.Text == "") ;
+            if (validatePage()) 
             {
-                saleErrorLabel.Content = "Please fill all the data.";
-                saleErrorLabel.Visibility = Visibility.Visible;
-                return;
+                Sale newSale = new Sale();
+                newSale.MemberID = MemberIDBox.Text;
+                newSale.OrderNumber = int.Parse(OrderNumber.Text);
+                newSale.Items = itemList; 
+
+                _collection.InsertOne(newSale);
+
+                MemberIDBox.Text = "";
+                OrderNumber.Text = "";
+                ItemID.Text = "";
+                ItemQuantity.Text = ""; 
+
+                itemList.Clear();
+                ItemListView.Items.Clear(); 
             }
-            string pattern = "^[A-Z]{4}d{2}"; //Four capital letters and 2 digit numbers
-            bool isMatch = Regex.IsMatch(MemberIDBox.Text, pattern);
-            if (!isMatch)
+        }
+        private void AddToOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (validatePage()) 
             {
-                saleErrorLabel.Content = "Member ID is not of a valid format. Please try again.";
-                saleErrorLabel.Visibility = Visibility.Visible;
-                return;
+                Item Newitem = new Item();
+                Newitem.ItemID = int.Parse(ItemID.Text);
+                Newitem.ItemQty = int.Parse(ItemQuantity.Text);
+
+                itemList.Add(Newitem);
+                ItemListView.Items.Add(Newitem);
             }
-            pattern = "^d{5}"; //
-            isMatch = Regex.IsMatch(orderNumber.Text, pattern);
-            if (!isMatch)
+
+        }
+
+        private bool validatePage() 
+        {
+            bool isValid = false;
+
+            bool valid = int.TryParse(OrderNumber.Text, out _); 
+
+            if (MemberIDBox.Text == "" || OrderNumber.Text == "" || ItemID.Text == "" || ItemQuantity.Text == "")
             {
-                saleErrorLabel.Content = "Order number is not of a valid format. Please try again.";
-                saleErrorLabel.Visibility = Visibility.Visible;
-                return;
+                SaleErrorLabel.Content = "Please fill all the data.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return isValid;
             }
-            pattern = "^d{3}"; //
-            isMatch = Regex.IsMatch(itemID.Text, pattern);
-            if (!isMatch)
+            if (!int.TryParse(OrderNumber.Text, out _)) 
             {
-                saleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
-                saleErrorLabel.Visibility = Visibility.Visible;
-                return;
+                SaleErrorLabel.Content = "Order number is not of a valid format. Please try again.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return isValid;
             }
-            pattern = "^d{2}"; //
-            isMatch = Regex.IsMatch(itemQuantity.Text, pattern);
-            if (!isMatch)
+            if (!int.TryParse(ItemID.Text, out _))
             {
-                saleErrorLabel.Content = "Item Quantity is not of a valid format. Please try again.";
-                saleErrorLabel.Visibility = Visibility.Visible;
-                return;
+                SaleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return isValid;
             }
+            if (!int.TryParse(ItemQuantity.Text, out _))
+            {
+                SaleErrorLabel.Content = "Item Quantity is not of a valid format. Please try again.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return isValid;
+            }
+
+            return true;
         }
 
         private void NavigateToDashboard(object sender, RoutedEventArgs e)
         {
             DashboardPage dash = new DashboardPage(myParent);
             myParent.Content = dash;
+        }
+
+
+
+        private void regex() 
+        {
+            string pattern = "^[A-Z]{4}d{2}"; //Four capital letters and 2 digit numbers
+            bool isMatch = Regex.IsMatch(MemberIDBox.Text, pattern);
+            if (!isMatch)
+            {
+                SaleErrorLabel.Content = "Member ID is not of a valid format. Please try again.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
+            pattern = "^d{5}"; //5 numbers
+            isMatch = Regex.IsMatch(OrderNumber.Text, pattern);
+            if (!isMatch)
+            {
+                SaleErrorLabel.Content = "Order number is not of a valid format. Please try again.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
+            pattern = "^d{3}"; //3 numbers
+            isMatch = Regex.IsMatch(ItemID.Text, pattern);
+            if (!isMatch)
+            {
+                SaleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
+            pattern = "^d{2}"; //2 numbers
+            isMatch = Regex.IsMatch(ItemQuantity.Text, pattern);
+            if (!isMatch)
+            {
+                SaleErrorLabel.Content = "Item Quantity is not of a valid format. Please try again.";
+                SaleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
         }
     }
 
