@@ -107,25 +107,43 @@ namespace DraftGotoGro
 
         var member = button.Tag as Member;
 
-        // Save logic here
-        updateButton.Visibility = Visibility.Visible;
-        removeButton.Visibility = Visibility.Visible;
-        cancelButton.Visibility = Visibility.Collapsed;
-        saveButton.Visibility = Visibility.Collapsed;
-        // Update Button Logic
-        if (member != null)
-        {
-            SaveOrUpdateMember(member);
+            updateButton.Visibility = Visibility.Visible;
+            removeButton.Visibility = Visibility.Visible;
+            cancelButton.Visibility = Visibility.Collapsed;
+            saveButton.Visibility = Visibility.Collapsed;
+
+            if (member != null)
+            {
+                SaveOrUpdateMember(member);
+            }
+            else
+            {
+                MessageBox.Show("No member information provided.");
+            }
 
         }
-        else
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("No member information provided.");
+            if (MemberDataGrid.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No member selected!");
+                return;
+            }
+
+            var selectedMember = MemberDataGrid.SelectedItem as Member;
+
+            if (selectedMember != null)
+            {
+                var filter = Builders<Member>.Filter.Eq(m => m.Id, selectedMember.Id);
+                _collection.DeleteOne(filter);
+                (MemberDataGrid.ItemsSource as ObservableCollection<Member>).Remove(selectedMember);
+            }
         }
-    }
-    public void SaveOrUpdateMember(Member member)
-    {
-        var filter = Builders<Member>.Filter.Eq(m => m.Id, member.Id);
+
+        public void SaveOrUpdateMember(Member member)
+        {
+            var filter = Builders<Member>.Filter.Eq(m => m.Id, member.Id);
 
         // Check if a member with the given ID already exists
         var existingMember = _collection.Find(filter).FirstOrDefault();
@@ -137,38 +155,13 @@ namespace DraftGotoGro
                 .Set(m => m.PhoneNumber, member.PhoneNumber)
                 .Set(m => m.Address, member.Address);
 
-            _collection.UpdateOne(filter, update);
+                _collection.UpdateOne(filter, update);
+            }
+            else
+            {
+                _collection.InsertOne(member);
+            }
         }
-        else
-        {
-            _collection.InsertOne(member);
-        }
+
     }
-
-
-    private void RemoveButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (MemberDataGrid.SelectedItems.Count == 0)
-        {
-            MessageBox.Show("No member selected!");
-            return;
-        }
-
-        var selectedMember = MemberDataGrid.SelectedItem as Member;
-        if (selectedMember != null)
-        {
-            var filter = Builders<Member>.Filter.Eq(m => m.Id, selectedMember.Id);
-            _collection.DeleteOne(filter);
-            (MemberDataGrid.ItemsSource as ObservableCollection<Member>).Remove(selectedMember);
-        }
-    }
-
 }
-public class Member // This is your member model class
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string PhoneNumber { get; set; }
-    public string Address { get; set; }
-}
-

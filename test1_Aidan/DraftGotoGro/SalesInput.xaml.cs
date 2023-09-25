@@ -27,14 +27,45 @@ namespace DraftGotoGro
 
         private void AddToOrderButton_Click(object sender, RoutedEventArgs e)
         {
-            //Check that the item ID and Quantity boxes are pupulated and valid
-
-            //add item ID and Quantity to the listview
+            if (memberIDBox.Text == "" || orderNumber.Text == "" || itemID.Text == "" || itemQuantity.Text == "") ;
+            {
+                saleErrorLabel.Content = "Please fill all the data.";
+                saleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
+            string pattern = "^[A-Z]{4}d{2}"; //Four capital letters and 2 digit numbers
+            bool isMatch = Regex.IsMatch(MemberIDBox.Text, pattern);
+            if (!isMatch)
+            {
+                saleErrorLabel.Content = "Member ID is not of a valid format. Please try again.";
+                saleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
+            pattern = "^d{5}"; //
+            isMatch = Regex.IsMatch(orderNumber.Text, pattern);
+            if (!isMatch)
+            {
+                saleErrorLabel.Content = "Order number is not of a valid format. Please try again.";
+                saleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
+            pattern = "^d{3}"; //
+            isMatch = Regex.IsMatch(itemID.Text, pattern);
+            if (!isMatch)
+            {
+                saleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
+                saleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
+            pattern = "^d{2}"; //
+            isMatch = Regex.IsMatch(itemQuantity.Text, pattern);
+            if (!isMatch)
+            {
+                saleErrorLabel.Content = "Item Quantity is not of a valid format. Please try again.";
+                saleErrorLabel.Visibility = Visibility.Visible;
+                return;
+            }
         }
-
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Check there is a valid member ID 
 
             //Submit the order to the database
         }
