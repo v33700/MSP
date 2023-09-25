@@ -9,7 +9,7 @@
       Title="SalesInput">
 
     <Grid x:Name="MainGrid">
-        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="56,313,0,0" Width="120" Click="SubmitButton_Click" Visibility="Visible" Height="49" VerticalAlignment="Top">
+        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Left" Margin="56,313,0,0" Width="120" Click="SubmitButtons" Visibility="Visible" Height="49" VerticalAlignment="Top">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

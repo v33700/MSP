@@ -21,60 +21,60 @@ namespace DraftGotoGro
     /// </summary>
     public partial class SalesInput : Page
     {
-        TextBox MemberIDBox, OrderNumber, ItemID, ItemQuantity;
-        Button SubmitButton;
-        Label SaleErrorLabel;
+        TextBox memberIDBox, orderNumber, itemID, itemQuantity;
+        Button submitButton;
+        Label saleErrorLabel;
         MainWindow myParent;
         public SalesInput(MainWindow win)
         {
             InitializeComponent();
-            MemberIDBox = (TextBox)MainGrid.FindName("MemberIDBox");
-            OrderNumber = (TextBox)MainGrid.FindName("OrderNumber");
-            SubmitButton = (Button)MainGrid.FindName("AddToOrderButton");
-            SaleErrorLabel = (Label)MainGrid.FindName("SaleErrorLabel");
-            ItemID = (TextBox)MainGrid.FindName("ItemID");
-            ItemQuantity = (TextBox)MainGrid.FindName("ItemQuantity");
+            memberIDBox = (TextBox)MainGrid.FindName("MemberIDBox");
+            orderNumber = (TextBox)MainGrid.FindName("OrderNumber");
+            submitButton = (Button)MainGrid.FindName("AddToOrderButton");
+            saleErrorLabel = (Label)MainGrid.FindName("SaleErrorLabel");
+            itemID = (TextBox)MainGrid.FindName("ItemID");
+            itemQuantity = (TextBox)MainGrid.FindName("ItemQuantity");
 
             myParent = win;
         }
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        private void SubmitButtons(object sender, RoutedEventArgs e)
         {
-            if (MemberIDBox.Text == "" || OrderNumber.Text == "" || ItemID.Text == "" || ItemQuantity.Text == "") ;
+            if (memberIDBox.Text == "" || orderNumber.Text == "" || itemID.Text == "" || itemQuantity.Text == "") ;
             {
-                SaleErrorLabel.Content = "Please fill all the data.";
-                SaleErrorLabel.Visibility = Visibility.Visible;
+                saleErrorLabel.Content = "Please fill all the data.";
+                saleErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
             string pattern = "^[A-Z]{4}d{2}"; //Four capital letters and 2 digit numbers
             bool isMatch = Regex.IsMatch(MemberIDBox.Text, pattern);
             if (!isMatch)
             {
-                SaleErrorLabel.Content = "Member ID is not of a valid format. Please try again.";
-                SaleErrorLabel.Visibility = Visibility.Visible;
+                saleErrorLabel.Content = "Member ID is not of a valid format. Please try again.";
+                saleErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
             pattern = "^d{5}"; //
-            isMatch = Regex.IsMatch(OrderNumber.Text, pattern);
+            isMatch = Regex.IsMatch(orderNumber.Text, pattern);
             if (!isMatch)
             {
-                SaleErrorLabel.Content = "Order number is not of a valid format. Please try again.";
-                SaleErrorLabel.Visibility = Visibility.Visible;
+                saleErrorLabel.Content = "Order number is not of a valid format. Please try again.";
+                saleErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
             pattern = "^d{3}"; //
-            isMatch = Regex.IsMatch(ItemID.Text, pattern);
+            isMatch = Regex.IsMatch(itemID.Text, pattern);
             if (!isMatch)
             {
-                SaleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
-                SaleErrorLabel.Visibility = Visibility.Visible;
+                saleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
+                saleErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
             pattern = "^d{2}"; //
-            isMatch = Regex.IsMatch(ItemQuantity.Text, pattern);
+            isMatch = Regex.IsMatch(itemQuantity.Text, pattern);
             if (!isMatch)
             {
-                SaleErrorLabel.Content = "Item Quantity is not of a valid format. Please try again.";
-                SaleErrorLabel.Visibility = Visibility.Visible;
+                saleErrorLabel.Content = "Item Quantity is not of a valid format. Please try again.";
+                saleErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
         }
