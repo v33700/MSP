@@ -19,10 +19,23 @@ namespace DraftGotoGro
     /// Interaction logic for SalesInput.xaml
     ///  </summary>
     public partial class SalesInput : Page
+
     {
+        TextBox memberIDBox, orderNumber, itemID, itemQuantity;
+        Button submitButton;
+        Label saleErrorLabel;
+        MainWindow myParent;
         public SalesInput()
         {
             InitializeComponent();
+            memberIDBox = (TextBox)MainGrid.FindName("MemberIDBox");
+            orderNumber = (TextBox)MainGrid.FindName("OrderNumber");
+            submitButton = (Button)MainGrid.FindName("AddToOrderButton");
+            saleErrorLabel = (Label)MainGrid.FindName("SaleErrorLabel");
+            itemID = (TextBox)MainGrid.FindName("ItemID");
+            itemQuantity = (TextBox)MainGrid.FindName("ItemQuantity");
+
+            myParent = win;
         }
 
         private void AddToOrderButton_Click(object sender, RoutedEventArgs e)
