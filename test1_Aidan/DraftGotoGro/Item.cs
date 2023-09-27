@@ -10,5 +10,7 @@ namespace DraftGotoGro
     {
         public int ItemID { get; set; }
         public int ItemQty { get; set; }
+        public string ItemName { get; set; }
+
     }
 }
