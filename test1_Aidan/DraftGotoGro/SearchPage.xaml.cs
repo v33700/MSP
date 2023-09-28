@@ -16,11 +16,6 @@ namespace DraftGotoGro
             InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            SetupDataGridColumns();
-        }
-
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             PlaceholderTextBlock.Visibility = Visibility.Collapsed;

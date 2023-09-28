@@ -6,7 +6,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DraftGotoGro"
         mc:Ignorable="d"
-        Title="Goto Gro MMS" Height="450" Width="800">
+        Title="Goto Gro MMS" Height="500" Width="900">
 
-    <Frame Name="MainFrame" Height="450" Width="800" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="800" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Image Grid.Column="0" Grid.Row="0" Source="/Basket.jpg" Height="100" Width="100"/>
+        <Button Grid.Column="0" Grid.Row="1" x:Name="HomeBtn" HorizontalAlignment="Right" Width="100" Click="HomeBtn_Click">Home</Button>
+        <Button Grid.Column="0" Grid.Row="2" x:Name="MemberBtn" Click="MemberBtn_Click">Add Member</Button>
+        <Button Grid.Column="0" Grid.Row="3" x:Name="SaleBtn" Click="SaleBtn_Click">Input Sale</Button>
+        <Button Grid.Column="0" Grid.Row="4" x:Name="SearchBtn" Click="SearchBtn_Click">Search Records</Button>
+        <Button Grid.Column="0" Grid.Row="5" x:Name="ReportBtn" Click="ReportBtn_Click">Reports</Button>
+        <Button Grid.Column="0" Grid.Row="6" x:Name="RefundBtn" Click="RefundBtn_Click">Refunds</Button>
+        <Button Grid.Column="0" Grid.Row="7" x:Name="LogoutBtn" Click="LogoutBtn_Click">Log Out</Button>
+        <Frame Grid.Column="1" Grid.RowSpan="8" x:Name="PageContent" NavigationUIVisibility="Hidden" ></Frame>
+    </Grid>
 </Window>

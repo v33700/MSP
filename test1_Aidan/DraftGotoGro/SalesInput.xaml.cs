@@ -12,16 +12,14 @@ namespace DraftGotoGro
 {
     public partial class SalesInput : Page
     {
-        MainWindow myParent;
         List<Item> itemList = new List<Item>();  
 
         private IMongoDatabase _database;
         private IMongoCollection<Sale> _collection;
 
-        public SalesInput(MainWindow win)
+        public SalesInput()
         {
             InitializeComponent();
-            myParent = win;
 
             var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
             _database = client.GetDatabase("SWE"); // database name
@@ -94,14 +92,6 @@ namespace DraftGotoGro
 
             return true;
         }
-
-        private void NavigateToDashboard(object sender, RoutedEventArgs e)
-        {
-            DashboardPage dash = new DashboardPage(myParent);
-            myParent.Content = dash;
-        }
-
-
 
         private void regex() 
         {

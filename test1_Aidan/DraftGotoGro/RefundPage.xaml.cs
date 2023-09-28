@@ -6,6 +6,10 @@ namespace DraftGotoGro
 {
     public partial class RefundPage : Page
     {
+        public RefundPage()
+        {
+            InitializeComponent();
+        }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

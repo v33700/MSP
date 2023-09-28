@@ -9,14 +9,12 @@ namespace DraftGotoGro
 {
     public partial class MemberPage : Page
     {
-        MainWindow myParent;
         private IMongoDatabase _database;
         private IMongoCollection<Member> _collection;
 
-        public MemberPage(MainWindow win)
+        public MemberPage()
         {
             InitializeComponent();
-            myParent = win;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -33,13 +31,6 @@ namespace DraftGotoGro
             var members = _collection.Find(_ => true).ToList(); // Retrieve all members from the database
             MemberDataGrid.ItemsSource = new ObservableCollection<Member>(members);
         }
-
-        private void NavigateToDashboard(object sender, RoutedEventArgs e)
-        {
-            DashboardPage dash = new DashboardPage(myParent);
-            myParent.Content = dash;
-        }
-
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {

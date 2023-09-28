@@ -1,38 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 
 namespace DraftGotoGro
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    /// 
+{ 
     public partial class MainWindow : Window
     {
-        //create all the pages
-        //EmployeeLogin employeeLoginPage = new EmployeeLogin();
-        //SalesInput salesInputPage = new SalesInput();
-        //MemberPage editMemberPage = new MemberPage();
+        HomePage home1 = new HomePage();
+        SalesInput sale1 = new SalesInput();
+        MemberPage member1 = new MemberPage();
+        Report report1 = new Report();
+        RefundPage refund1 = new RefundPage();
+        SearchPage search1 = new SearchPage();
 
         public MainWindow()
         {
             InitializeComponent();
             EmployeeLogin employeeLoginPage = new EmployeeLogin(this);
-            this.Content = employeeLoginPage; //Change this to a homepage when we make it
+            PageContent.Content = employeeLoginPage;
+            HideNavigation();
+
+        }
+
+        public void HideNavigation() 
+        {
+            HomeBtn.Visibility = Visibility.Hidden;
+            MemberBtn.Visibility = Visibility.Hidden;
+            SaleBtn.Visibility = Visibility.Hidden;
+            SearchBtn.Visibility = Visibility.Hidden;
+            ReportBtn.Visibility = Visibility.Hidden;
+            RefundBtn.Visibility = Visibility.Hidden;
+            LogoutBtn.Visibility = Visibility.Hidden;
+        }
+
+        public void ShowNavigation()
+        {
+            HomeBtn.Visibility = Visibility.Visible;
+            MemberBtn.Visibility = Visibility.Visible;
+            SaleBtn.Visibility = Visibility.Visible;
+            SearchBtn.Visibility = Visibility.Visible;
+            ReportBtn.Visibility = Visibility.Visible;
+            RefundBtn.Visibility = Visibility.Visible;
+            LogoutBtn.Visibility = Visibility.Visible;
+        }
+
+        private void HomeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PageContent.Content = home1;
+        }
+
+        private void MemberBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PageContent.Content = member1;
+        }
+
+        private void SaleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PageContent.Content = sale1;
+        }
+
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PageContent.Content = search1;
+        }
+
+        private void ReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PageContent.Content = report1;
+        }
+
+        private void RefundBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PageContent.Content = refund1;
+        }
+
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PageContent.Content = new EmployeeLogin(this);
+            HideNavigation();
         }
     }
 }

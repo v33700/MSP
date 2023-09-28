@@ -103,8 +103,8 @@ namespace DraftGotoGro
                 SubmitButton.Content = "Login failed";
             }
 
-            DashboardPage dash = new DashboardPage(myParent);
-            myParent.Content = dash;
+            myParent.PageContent.Content = new HomePage();
+            myParent.ShowNavigation(); 
 
         }
     }
