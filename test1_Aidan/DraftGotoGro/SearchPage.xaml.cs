@@ -74,24 +74,30 @@ namespace DraftGotoGro
             if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search")
             {
                 var members = _memberCollection.Find(_ => true).ToList();
-                
+                SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
 
                 foreach (Member m in members) 
                 {
                     if (m.Id.ToString() == SearchTextBox.Text) 
                     {
-                        SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
+                        
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
                         break;
                     }
+
                 }
                 ErrorLabel.Visibility = Visibility.Visible;
-                
+                SearchResultsDataGrid.Columns.RemoveAt(1);
 
             }
             else if ((((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search"))
             {
+                SearchResultsDataGrid.Columns.RemoveAt(1);
                 SearchResultsDataGrid.ItemsSource = SaleResult;
+            }
+            else
+            {
+                ErrorLabel.Visibility = Visibility.Visible;
             }
         }
 
@@ -104,6 +110,11 @@ namespace DraftGotoGro
                 {
                     var saleDetailsWindow = new SaleDetailsWindow(selectedSale);
                     saleDetailsWindow.Show();
+                }
+                else
+                {
+                    ErrorLabel.Visibility = Visibility.Visible;
+                    SearchResultsDataGrid.Columns.RemoveAt(1);
                 }
             }
         }
