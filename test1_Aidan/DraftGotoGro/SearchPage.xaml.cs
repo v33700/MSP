@@ -15,6 +15,7 @@ namespace DraftGotoGro
 
         private IMongoDatabase _database;
         private IMongoCollection<Member> _memberCollection;
+       
 
         public SearchPage()
         {
@@ -23,6 +24,7 @@ namespace DraftGotoGro
             var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
             _database = client.GetDatabase("SWE"); // database name
             _memberCollection = _database.GetCollection<Member>("Members");
+          
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -72,16 +74,19 @@ namespace DraftGotoGro
             if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search")
             {
                 var members = _memberCollection.Find(_ => true).ToList();
-                SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
+                
 
                 foreach (Member m in members) 
                 {
                     if (m.Id.ToString() == SearchTextBox.Text) 
                     {
+                        SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
                         break;
                     }
                 }
+                ErrorLabel.Visibility = Visibility.Visible;
+                
 
             }
             else if ((((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search"))
