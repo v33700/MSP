@@ -35,5 +35,6 @@
         <DataGrid x:Name="SearchResultsDataGrid" Margin="10,10,10,10" AutoGenerateColumns="False" Grid.Row="3" SelectionChanged="SearchResultsDataGrid_SelectionChanged">
             <!-- The columns of DataGrid will be created dynamically in code-behind -->
         </DataGrid>
+
     </Grid>
 </Page>
