@@ -32,7 +32,10 @@ namespace DraftGotoGro
                 Sale newSale = new Sale();
                 newSale.MemberID = MemberIDBox.Text;
                 newSale.OrderNumber = int.Parse(OrderNumber.Text);
-                newSale.Items = itemList; 
+                newSale.Items = itemList;
+                newSale.saleDate = DateTime.Now;
+
+                //update sales list in the member from the members table with a matching ID
 
                 _collection.InsertOne(newSale);
 
