@@ -11,16 +11,37 @@
     <!-- Loaded="Page_Loaded"> -->
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <TextBlock Text="From: " VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <DatePicker x:Name="FromDate" />
-                <TextBlock Text="To: " VerticalAlignment="Center" Margin="20,0,10,0"/>
-                <DatePicker x:Name="ToDate" />
+        <Border Margin="100" Padding="5" BorderBrush="SteelBlue" BorderThickness="5" CornerRadius="10"
+          VerticalAlignment="Top">
+            <StackPanel HorizontalAlignment="Left" Height="75" Margin="0,0,0,0" VerticalAlignment="Top" Width="550">
+                <StackPanel Orientation="Horizontal" Width="305" Margin="25,25,0,0" HorizontalAlignment="Left">
+                    <TextBlock Text="From: " VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <DatePicker x:Name="FromDate" />
+                    <TextBlock Text="To: " VerticalAlignment="Center" Margin="20,0,10,0"/>
+                    <DatePicker x:Name="ToDate" />
+                </StackPanel>
+                <Button Content="Sale Report" Width="150" Height="50" Margin="0,-35,20,0" x:Name="SaleReportBtn" HorizontalAlignment="Right"/>
             </StackPanel>
+        </Border>
 
-            <Button Content="Member Report" Width="150" Height="40" Margin="0,0,0,10"/>
-            <Button Content="Sale Report" Width="150" Height="40"/>
-        </StackPanel>
+        <Border Margin="100,250,100,0" Padding="5" BorderBrush="SteelBlue" BorderThickness="5" CornerRadius="10"
+          VerticalAlignment="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="125" />
+                    <ColumnDefinition Width="125" />
+                    <ColumnDefinition Width="125" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                
+                <RadioButton  Grid.Column="0"  Content="Last Week" Height="30" Width="100" Margin="0,10,0,0" x:Name="WeekRadio"/>
+                <RadioButton  Grid.Column="1"  Content="Last Month" Height="30" Width="100" Margin="0,10,0,0" x:Name="MonthRadio"/>
+                <RadioButton Grid.Column="2" Content="All Members" Height="30" Width="100"  Margin="0,10,0,0" x:Name="AllRadio"/>
+                <Button Grid.Column="3" Content="Member Report" Width="150" Height="50" Margin="0,0,0,0" x:Name="MemberReportBtn"/>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
