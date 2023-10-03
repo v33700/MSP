@@ -12,7 +12,7 @@ namespace DraftGotoGro
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-        public List<Sale> sales { get; set; }
+        public List<Sale> Sales { get; set; }
     }
      
 }
