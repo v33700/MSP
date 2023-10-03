@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.Linq;
 using System.Text;
+using ThirdParty.Json.LitJson;
 
 namespace DraftGotoGro
 {
@@ -40,4 +41,7 @@ namespace DraftGotoGro
         }
 
     }
+    //string jsonData = returned database data
+   // CSVGEN csvGenerator = new CSVGEN(jsonData);
+    //csvGenerator.ToCsv("output.csv");
 }

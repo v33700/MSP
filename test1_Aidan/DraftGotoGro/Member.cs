@@ -14,5 +14,5 @@ namespace DraftGotoGro
         public string Address { get; set; }
         public List<Sale> Sales { get; set; }
     }
-     
+    
 }
