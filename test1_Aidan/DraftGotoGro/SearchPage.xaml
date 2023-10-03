@@ -26,8 +26,10 @@
         <Grid Margin="10,10,0,0" Grid.Row="1">
             <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus"/>
             <TextBlock x:Name="PlaceholderTextBlock" Text="Member ID" IsHitTestVisible="False" Foreground="Gray" VerticalAlignment="Center" Margin="5,0,0,0"/>
-        </Grid>
+            <Label x:Name="ErrorLabel" Content="No matching record" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False" Background="White" Foreground="Red" Visibility="Hidden" Margin="200,0,0,0"/>
 
+        </Grid>
+       
         <!-- Button for Search -->
         <Button Content="Search" Width="200" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" Click="SearchButton_Click"/>
 
@@ -35,6 +37,7 @@
         <DataGrid x:Name="SearchResultsDataGrid" Margin="10,10,10,10" AutoGenerateColumns="False" Grid.Row="3" SelectionChanged="SearchResultsDataGrid_SelectionChanged">
             <!-- The columns of DataGrid will be created dynamically in code-behind -->
         </DataGrid>
+        
 
     </Grid>
 </Page>
