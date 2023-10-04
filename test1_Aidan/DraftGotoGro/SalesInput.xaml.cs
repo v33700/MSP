@@ -16,6 +16,7 @@ namespace DraftGotoGro
 
         private IMongoDatabase _database;
         private IMongoCollection<Sale> _collection;
+        private IMongoCollection<Member> _collectionMember;
 
         public SalesInput()
         {
@@ -36,6 +37,12 @@ namespace DraftGotoGro
                 newSale.saleDate = DateTime.Now;
 
                 //update sales list in the member from the members table with a matching ID
+
+                var memberFilter = Builders<Member>.Filter.Eq(m => m.Id.ToString(), newSale.MemberID);
+
+                var memberUpdate = Builders<Member>.Update.Push(m => m.Sales, newSale);
+
+                _collectionMember.UpdateOne(memberFilter, memberUpdate);
 
                 _collection.InsertOne(newSale);
 
