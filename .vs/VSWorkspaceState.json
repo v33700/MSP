@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Images",
+    "\\test1_Aidan",
+    "\\test1_Aidan\\DraftGotoGro"
   ],
-  "SelectedNode": "\\DraftGotoGro.sln",
+  "SelectedNode": "\\test1_Aidan\\DraftGotoGro\\SearchPage.xaml.cs",
   "PreviewInSolutionExplorer": false
 }
