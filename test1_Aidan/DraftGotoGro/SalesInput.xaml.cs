@@ -34,7 +34,7 @@ namespace DraftGotoGro
                 newSale.MemberID = MemberIDBox.Text;
                 newSale.OrderNumber = int.Parse(OrderNumber.Text);
                 newSale.Items = itemList;
-                newSale.saleDate = DateTime.Now;
+                newSale.SaleDate = DateTime.Now;
 
                 //update sales list in the member from the members table with a matching ID
 

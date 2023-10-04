@@ -4,6 +4,7 @@ using System.Windows;
 using System.Diagnostics;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Linq;
 
 namespace DraftGotoGro
 {
@@ -34,7 +35,12 @@ namespace DraftGotoGro
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            (MemberDataGrid.ItemsSource as ObservableCollection<Member>).Add(new Member() {Id = MemberDataGrid.Items.Count });
+            var membersCollection = MemberDataGrid.ItemsSource as ObservableCollection<Member>;
+            if (membersCollection != null)
+            {
+                int maxId = membersCollection.Max(member => member.Id);
+                membersCollection.Add(new Member() { Id = maxId + 1 });
+            }
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)

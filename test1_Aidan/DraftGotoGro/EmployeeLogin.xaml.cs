@@ -107,5 +107,11 @@ namespace DraftGotoGro
             myParent.ShowNavigation(); 
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            myParent.PageContent.Content = new HomePage(); 
+            myParent.ShowNavigation();
+        }
     }
 }
