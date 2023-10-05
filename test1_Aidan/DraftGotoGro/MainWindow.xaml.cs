@@ -18,7 +18,7 @@ namespace DraftGotoGro
             EmployeeLogin employeeLoginPage = new EmployeeLogin(this);
             PageContent.Content = employeeLoginPage;
             HideNavigation();
-
+            // new comment
         }
 
         public void HideNavigation() 
