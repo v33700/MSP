@@ -35,6 +35,7 @@ namespace DraftGotoGro
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            //get collection and set ID to whatever the highest current ID + 1 is
             var membersCollection = MemberDataGrid.ItemsSource as ObservableCollection<Member>;
             if (membersCollection != null)
             {
