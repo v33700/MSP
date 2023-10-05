@@ -49,7 +49,7 @@ namespace DraftGotoGro
             {
                 DateTime oneWeekAgo = DateTime.UtcNow.AddDays(-7);
 
-                var filter = Builders<Sale>.Filter.Gte(s => s.saleDate, oneWeekAgo);
+                var filter = Builders<Sale>.Filter.Gte(s => s.SaleDate, oneWeekAgo);
                 var sales = _saleCollection.Find(filter).ToList();
 
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
@@ -72,7 +72,7 @@ namespace DraftGotoGro
             {
                 DateTime oneMonthAgo = DateTime.UtcNow.AddDays(-30);
 
-                var filter = Builders<Sale>.Filter.Gte(s => s.saleDate, oneMonthAgo);
+                var filter = Builders<Sale>.Filter.Gte(s => s.SaleDate, oneMonthAgo);
                 var sales = _saleCollection.Find(filter).ToList();
 
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
