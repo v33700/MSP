@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DraftGotoGro
 {
-    public class Member // This is your member model class
+    public class Member // This is your member model class NOOOOOOO
     {
         public int Id { get; set; }
         public string Name { get; set; }
