@@ -115,7 +115,10 @@ namespace DraftGotoGro
 
             }
         }
-        }
 
+        private void SaleReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
     }
 }
