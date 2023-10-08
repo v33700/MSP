@@ -58,7 +58,6 @@ namespace DraftGotoGro
             removeButton.Visibility = Visibility.Collapsed;
             cancelButton.Visibility = Visibility.Visible;
             saveButton.Visibility = Visibility.Visible;
-
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -75,7 +74,6 @@ namespace DraftGotoGro
             removeButton.Visibility = Visibility.Visible;
             cancelButton.Visibility = Visibility.Collapsed;
             saveButton.Visibility = Visibility.Collapsed;
-
         }
 
 
@@ -104,7 +102,6 @@ namespace DraftGotoGro
             {
                 MessageBox.Show("No member information provided.");
             }
-
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
@@ -146,6 +143,5 @@ namespace DraftGotoGro
                 _collection.InsertOne(member);
             }
         }
-
     }
 }
