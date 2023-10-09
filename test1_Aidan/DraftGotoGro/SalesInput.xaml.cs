@@ -31,14 +31,14 @@ namespace DraftGotoGro
             if (validatePage()) 
             {
                 Sale newSale = new Sale();
-                newSale.MemberID = MemberIDBox.Text;
+                newSale.MemberID = int.Parse(MemberIDBox.Text);
                 newSale.OrderNumber = int.Parse(OrderNumber.Text);
                 newSale.Items = itemList;
                 newSale.SaleDate = DateTime.Now;
 
                 //update sales list in the member from the members table with a matching ID
 
-                var memberFilter = Builders<Member>.Filter.Eq(m => m.Id.ToString(), newSale.MemberID);
+                var memberFilter = Builders<Member>.Filter.Eq(m => m.Id, newSale.MemberID);
 
                 var memberUpdate = Builders<Member>.Update.Push(m => m.Sales, newSale);
 
