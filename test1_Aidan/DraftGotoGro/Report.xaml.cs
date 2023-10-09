@@ -93,7 +93,7 @@ namespace DraftGotoGro
             }
             if (AllRadio.IsChecked == true)
             {
-                            var sales = _saleCollection.Find(_ => true).ToList();
+                var sales = _saleCollection.Find(_ => true).ToList();
 
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
 
