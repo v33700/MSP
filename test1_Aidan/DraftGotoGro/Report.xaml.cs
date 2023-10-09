@@ -118,7 +118,41 @@ namespace DraftGotoGro
 
         private void SaleReportBtn_Click(object sender, RoutedEventArgs e)
         {
-            return;
+           
+            if (FromDate.SelectedDate.HasValue && ToDate.SelectedDate.HasValue)
+            {
+                DateTime startDate = FromDate.SelectedDate.Value;
+                DateTime endDate = ToDate.SelectedDate.Value;
+
+               
+                if (startDate > endDate)
+                {
+                    MessageBox.Show("Start date should be earlier than end date.");
+                    return;
+                }
+
+            
+                var filter = Builders<Sale>.Filter.And(
+                    Builders<Sale>.Filter.Gte(s => s.SaleDate, startDate),
+                    Builders<Sale>.Filter.Lte(s => s.SaleDate, endDate));
+                var salesWithinDates = _saleCollection.Find(filter).ToList();
+
+                using (var ms = new MemoryStream())
+                {
+                    using (var writer = new BsonBinaryWriter(ms))
+                    {
+                        BsonSerializer.Serialize(writer, salesWithinDates);
+                    }
+
+                    string jsonData = Encoding.UTF8.GetString(ms.ToArray());
+                    CSVGEN csvGenerator = new CSVGEN(jsonData);
+                    csvGenerator.ToCsv("sales_output.csv");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select both start and end dates.");
+            }
         }
     }
 }
