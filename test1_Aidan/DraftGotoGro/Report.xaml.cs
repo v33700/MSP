@@ -30,7 +30,7 @@ namespace DraftGotoGro
         private ObservableCollection<Sale> SaleResult = new ObservableCollection<Sale>();
 
         private IMongoDatabase _database;
-       private IMongoCollection<Member> _memberCollection;
+        private IMongoCollection<Member> _memberCollection;
 
         private IMongoCollection<Sale> _saleCollection; // Add this to the class definition
 
@@ -62,10 +62,8 @@ namespace DraftGotoGro
                     {
                         BsonSerializer.Serialize(writer, membersFromSales);
                     }
-
-                     string jsonData = Encoding.UTF8.GetString(ms.ToArray());
-                    CSVGEN csvGenerator = new CSVGEN(jsonData);
-                    csvGenerator.ToCsv("output.csv");
+                    string jsonData = Encoding.UTF8.GetString(ms.ToArray());
+                    SaveToFile(jsonData);
                 }
             }
             if (MonthRadio.IsChecked == true)
@@ -85,10 +83,8 @@ namespace DraftGotoGro
                     {
                         BsonSerializer.Serialize(writer, membersFromSales);
                     }
-
                     string jsonData = Encoding.UTF8.GetString(ms.ToArray());
-                    CSVGEN csvGenerator = new CSVGEN(jsonData);
-                    csvGenerator.ToCsv("output.csv");
+                    SaveToFile(jsonData);
                 }
             }
             if (AllRadio.IsChecked == true)
@@ -106,11 +102,8 @@ namespace DraftGotoGro
                     {
                         BsonSerializer.Serialize(writer, membersFromSales);
                     }
-
                     string jsonData = Encoding.UTF8.GetString(ms.ToArray());
-                    CSVGEN csvGenerator = new CSVGEN(jsonData);
-                    csvGenerator.ToCsv("output.csv");
-                    //just need a comment so i can commit
+                    SaveToFile(jsonData);
                 }
 
             }
@@ -118,20 +111,20 @@ namespace DraftGotoGro
 
         private void SaleReportBtn_Click(object sender, RoutedEventArgs e)
         {
-           
+
             if (FromDate.SelectedDate.HasValue && ToDate.SelectedDate.HasValue)
             {
                 DateTime startDate = FromDate.SelectedDate.Value;
                 DateTime endDate = ToDate.SelectedDate.Value;
 
-               
+
                 if (startDate > endDate)
                 {
                     MessageBox.Show("Start date should be earlier than end date.");
                     return;
                 }
 
-            
+
                 var filter = Builders<Sale>.Filter.And(
                     Builders<Sale>.Filter.Gte(s => s.SaleDate, startDate),
                     Builders<Sale>.Filter.Lte(s => s.SaleDate, endDate));
@@ -143,16 +136,42 @@ namespace DraftGotoGro
                     {
                         BsonSerializer.Serialize(writer, salesWithinDates);
                     }
-
                     string jsonData = Encoding.UTF8.GetString(ms.ToArray());
-                    CSVGEN csvGenerator = new CSVGEN(jsonData);
-                    csvGenerator.ToCsv("sales_output.csv");
+                    SaveToFile(jsonData);
                 }
             }
             else
             {
                 MessageBox.Show("Please select both start and end dates.");
             }
+        }
+
+        private string AskForFileName()
+        {
+            return CsvFileNameTextBox.Text;
+        }
+
+        private void SaveToFile(string jsonData)
+        {
+            string filename = AskForFileName();
+            if (string.IsNullOrEmpty(filename))
+            {
+                MessageBox.Show("Please enter a valid filename.");
+                return;
+            }
+
+            while (File.Exists(filename))
+            {
+                MessageBox.Show($"File {filename} already exists. Please choose another name.");
+                filename = AskForFileName();
+                if (string.IsNullOrEmpty(filename))
+                {
+                    MessageBox.Show("Please enter a valid filename.");
+                    return;
+                }
+            }
+
+
         }
     }
 }
