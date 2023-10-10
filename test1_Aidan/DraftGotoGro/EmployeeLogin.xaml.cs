@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MongoDB.Driver;
+using MongoDB.Bson;
+
 
 namespace DraftGotoGro
 {
@@ -32,6 +36,9 @@ namespace DraftGotoGro
 
         MainWindow myParent;
 
+        private IMongoDatabase _database;
+        private IMongoCollection<Employee> _collectionEmployee;
+
         public EmployeeLogin(MainWindow win)
         {
             InitializeComponent();
@@ -41,7 +48,22 @@ namespace DraftGotoGro
             usernameErrorLabel = (Label)MainGrid.FindName("UsernameErrorLabel");
             noPasswordLabel = (Label)MainGrid.FindName("NoPasswordLabel");
 
-            employees.Add(new Employee(1, "MYusername", "First", "Last", "Password1234", "email", 1234567890, new DateTime(2000, 01, 01)));
+            var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
+            _database = client.GetDatabase("SWE"); // database name
+            _collectionEmployee = _database.GetCollection<Employee>("Employees"); // db collection reference
+
+            //_collectionEmployee.InsertOne(new Employee(3, "ATest", "test", "user", "Password1234", "email@email.com", 1234567890, new DateTime(2000, 01, 01))); // <---- change this to add someone to the DB (Yes, this is awful.)
+
+            var filter = Builders<Employee>.Filter.Empty; // retrieve all documents in the collection
+
+            var projection = Builders<Employee>.Projection.Exclude("_id"); // exclude the _id field
+
+            var employeeDocuments = _collectionEmployee.Find(filter).Project<Employee>(projection).ToList();
+
+            foreach (var employeeDocument in employeeDocuments)
+            {
+                employees.Add(employeeDocument);
+            }
 
             myParent = win;
         }
@@ -57,6 +79,10 @@ namespace DraftGotoGro
                 usernameErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
+            else
+            {
+                usernameErrorLabel.Visibility = Visibility.Hidden;
+            }
 
             //Check types / sanitise inputs
             string pattern = "^[A-Z]{2}[a-z]{0,18}(?:\\d{2})?$"; //Two capital letters, 18 lowercase letters, optional 2-digit number
@@ -67,6 +93,10 @@ namespace DraftGotoGro
                 usernameErrorLabel.Content = "Username is not of a valid format. Please try again.";
                 usernameErrorLabel.Visibility = Visibility.Visible;
                 return;
+            }
+            else
+            {
+                usernameErrorLabel.Visibility = Visibility.Hidden;
             }
 
             //compare inputs with stored data
@@ -95,16 +125,13 @@ namespace DraftGotoGro
             if (usernameFound && passwordCorrect)
             {
                 //very good, do whatever needs to happen to log in.
-                SubmitButton.Content = "Login successful";
+                myParent.PageContent.Content = new HomePage();
+                myParent.ShowNavigation();
             }
             else
             {
                 SubmitButton.Content = "Login failed";
             }
-
-            myParent.PageContent.Content = new HomePage();
-            myParent.ShowNavigation(); 
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
