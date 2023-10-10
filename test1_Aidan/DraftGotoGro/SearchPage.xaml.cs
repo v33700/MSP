@@ -71,39 +71,59 @@ namespace DraftGotoGro
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            
             if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search")
             {
                 var members = _memberCollection.Find(_ => true).ToList();
+                var member_found = false;
                 
 
                 foreach (Member m in members) 
                 {
                     if (m.Id.ToString() == SearchTextBox.Text) 
                     {
+                        
                         SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
+                        member_found = true;
                         break;
                     }
                 }
-                ErrorLabel.Visibility = Visibility.Visible;
+                if (!member_found)
+                {
+                   (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Clear();
+
+                    ErrorLabel.Visibility = Visibility.Visible;
+
+                }
                 
 
             }
             else if ((((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search"))
             {
+                
                 SearchResultsDataGrid.ItemsSource = SaleResult;
+                SearchResultsDataGrid_SelectionChanged(sender, e);
             }
         }
 
-        private void SearchResultsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SearchResultsDataGrid_SelectionChanged(object sender, RoutedEventArgs e)
         {
+           
             if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search")
             {
                 var selectedSale = (Sale)SearchResultsDataGrid.SelectedItem;
                 if (selectedSale != null)
                 {
                     var saleDetailsWindow = new SaleDetailsWindow(selectedSale);
+                    
                     saleDetailsWindow.Show();
+                }
+                else
+                {
+                    
+
+                    ErrorLabel.Visibility = Visibility.Visible;
                 }
             }
         }

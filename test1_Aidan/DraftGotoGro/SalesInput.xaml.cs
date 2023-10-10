@@ -24,6 +24,7 @@ namespace DraftGotoGro
 
             var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
             _database = client.GetDatabase("SWE"); // database name
+            _collectionMember = _database.GetCollection<Member>("Members"); // db collection reference
             _collection = _database.GetCollection<Sale>("Sales");
         }
         private void SubmitButtons(object sender, RoutedEventArgs e)
