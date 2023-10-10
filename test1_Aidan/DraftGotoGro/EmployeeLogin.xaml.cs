@@ -41,7 +41,6 @@ namespace DraftGotoGro
             usernameErrorLabel = (Label)MainGrid.FindName("UsernameErrorLabel");
             noPasswordLabel = (Label)MainGrid.FindName("NoPasswordLabel");
 
-
             employees.Add(new Employee(1, "MYusername", "First", "Last", "Password1234", "email", 1234567890, new DateTime(2000, 01, 01)));
 
             myParent = win;
