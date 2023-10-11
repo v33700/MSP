@@ -29,6 +29,7 @@ namespace DraftGotoGro
         }
         private void SubmitButtons(object sender, RoutedEventArgs e)
         {
+
             if (validatePage()) 
             {
                 Sale newSale = new Sale();
@@ -40,6 +41,7 @@ namespace DraftGotoGro
                 //update sales list in the member from the members table with a matching ID
 
                 var memberFilter = Builders<Member>.Filter.Eq(m => m.Id, newSale.MemberID);
+
 
                 var memberUpdate = Builders<Member>.Update.Push(m => m.Sales, newSale);
 

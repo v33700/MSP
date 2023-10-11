@@ -54,13 +54,15 @@ namespace DraftGotoGro
 
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
 
+
                 var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
                 var membersFromSales = _memberCollection.Find(memberFilter).ToList();
                 using (var ms = new MemoryStream())
                 {
                     using (var writer = new BsonBinaryWriter(ms))
                     {
-                        BsonSerializer.Serialize(writer, membersFromSales);
+                        BsonSerializer.Serialize(writer, new { Members = membersFromSales });
+
                     }
                     string jsonData = Encoding.UTF8.GetString(ms.ToArray());
                     SaveToFile(jsonData);
@@ -72,8 +74,8 @@ namespace DraftGotoGro
 
                 var filter = Builders<Sale>.Filter.Gte(s => s.SaleDate, oneMonthAgo);
                 var sales = _saleCollection.Find(filter).ToList();
-
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
+
 
                 var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
                 var membersFromSales = _memberCollection.Find(memberFilter).ToList();
@@ -92,6 +94,7 @@ namespace DraftGotoGro
                 var sales = _saleCollection.Find(_ => true).ToList();
 
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
+
 
                 var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
                 var membersFromSales = _memberCollection.Find(memberFilter).ToList();
