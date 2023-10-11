@@ -16,5 +16,5 @@ namespace DraftGotoGro
         public List<Item> Items { get; set; }
         public DateTime SaleDate { get; set; }
     }
-        
+    
 }
