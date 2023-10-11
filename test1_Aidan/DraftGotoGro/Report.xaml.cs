@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static MongoDB.Bson.Serialization.Serializers.SerializerHelper;
+using System.Text.Json;
 
 namespace DraftGotoGro
 {
@@ -45,6 +46,9 @@ namespace DraftGotoGro
 
         private void MemberReportBtn_Click(object sender, RoutedEventArgs e)
         {
+            List<Member> membersFromSales = null;
+            var projection = Builders<Member>.Projection.Exclude("_id");
+
             if (WeekRadio.IsChecked == true)
             {
                 DateTime oneWeekAgo = DateTime.UtcNow.AddDays(-7);
@@ -54,21 +58,10 @@ namespace DraftGotoGro
 
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
 
-
                 var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
-                var membersFromSales = _memberCollection.Find(memberFilter).ToList();
-                using (var ms = new MemoryStream())
-                {
-                    using (var writer = new BsonBinaryWriter(ms))
-                    {
-                        BsonSerializer.Serialize(writer, new { Members = membersFromSales });
-
-                    }
-                    string jsonData = Encoding.UTF8.GetString(ms.ToArray());
-                    SaveToFile(jsonData);
-                }
+                membersFromSales = _memberCollection.Find(memberFilter).Project<Member>(projection).ToList();
             }
-            if (MonthRadio.IsChecked == true)
+            else if (MonthRadio.IsChecked == true)
             {
                 DateTime oneMonthAgo = DateTime.UtcNow.AddDays(-30);
 
@@ -76,42 +69,27 @@ namespace DraftGotoGro
                 var sales = _saleCollection.Find(filter).ToList();
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
 
-
                 var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
-                var membersFromSales = _memberCollection.Find(memberFilter).ToList();
-                using (var ms = new MemoryStream())
-                {
-                    using (var writer = new BsonBinaryWriter(ms))
-                    {
-                        BsonSerializer.Serialize(writer, membersFromSales);
-                    }
-                    string jsonData = Encoding.UTF8.GetString(ms.ToArray());
-                    SaveToFile(jsonData);
-                }
+                membersFromSales = _memberCollection.Find(memberFilter).Project<Member>(projection).ToList();
             }
-            if (AllRadio.IsChecked == true)
+            else if (AllRadio.IsChecked == true)
             {
                 var sales = _saleCollection.Find(_ => true).ToList();
 
                 var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
 
-
                 var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
-                var membersFromSales = _memberCollection.Find(memberFilter).ToList();
+                membersFromSales = _memberCollection.Find(memberFilter).Project<Member>(projection).ToList();
+            }
 
-                using (var ms = new MemoryStream())
-                {
-                    using (var writer = new BsonBinaryWriter(ms))
-                    {
-                        BsonSerializer.Serialize(writer, membersFromSales);
-                    }
-                    string jsonData = Encoding.UTF8.GetString(ms.ToArray());
-                    SaveToFile(jsonData);
-                }
+            if (membersFromSales != null)
+            {
+                string jsonData = JsonSerializer.Serialize(membersFromSales);
+                SaveToFile(jsonData);
+                MessageBox.Show("CSV has been successfully saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
         }
-
         private void SaleReportBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -120,33 +98,30 @@ namespace DraftGotoGro
                 DateTime startDate = FromDate.SelectedDate.Value;
                 DateTime endDate = ToDate.SelectedDate.Value;
 
-
                 if (startDate > endDate)
                 {
                     MessageBox.Show("Start date should be earlier than end date.");
                     return;
                 }
 
-
                 var filter = Builders<Sale>.Filter.And(
                     Builders<Sale>.Filter.Gte(s => s.SaleDate, startDate),
                     Builders<Sale>.Filter.Lte(s => s.SaleDate, endDate));
-                var salesWithinDates = _saleCollection.Find(filter).ToList();
 
-                using (var ms = new MemoryStream())
-                {
-                    using (var writer = new BsonBinaryWriter(ms))
-                    {
-                        BsonSerializer.Serialize(writer, salesWithinDates);
-                    }
-                    string jsonData = Encoding.UTF8.GetString(ms.ToArray());
-                    SaveToFile(jsonData);
-                }
+                var projection = Builders<Sale>.Projection.Exclude("_id");
+                var salesWithinDates = _saleCollection.Find(filter).Project<Sale>(projection).ToList();
+
+                string jsonData = JsonSerializer.Serialize(salesWithinDates);
+                SaveToFile(jsonData);
+                MessageBox.Show("CSV has been successfully saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
             else
             {
                 MessageBox.Show("Please select both start and end dates.");
             }
+
+
         }
 
         private string AskForFileName()
@@ -165,16 +140,36 @@ namespace DraftGotoGro
 
             while (File.Exists(filename))
             {
-                MessageBox.Show($"File {filename} already exists. Please choose another name.");
-                filename = AskForFileName();
-                if (string.IsNullOrEmpty(filename))
+                MessageBoxResult result = MessageBox.Show($"File {filename} already exists. Would you like to choose another name?", "File Exists", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Please enter a valid filename.");
-                    return;
+                    Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                    dlg.FileName = "Document"; 
+                    dlg.DefaultExt = ".csv"; 
+                    dlg.Filter = "CSV documents (.csv)|*.csv";
+
+                    // Show save file dialog box
+                    bool? dialogResult = dlg.ShowDialog();
+                                     
+                    if (dialogResult == true)
+                    {
+                           filename = dlg.FileName;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    return; 
                 }
             }
 
-
+            CSVGEN csvGenerator = new CSVGEN(jsonData);
+            csvGenerator.ToCsv(filename);
+            MessageBox.Show("CSV has been successfully saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
     }
 }
