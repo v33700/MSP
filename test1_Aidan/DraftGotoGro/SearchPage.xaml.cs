@@ -87,20 +87,21 @@ namespace DraftGotoGro
             {
                 var members = _memberCollection.Find(_ => true).ToList();
                 var member_found = false;
-                
+                SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
                 foreach (Member m in members) 
                 {
                     if (m.Id.ToString() == SearchTextBox.Text) 
                     { 
-                        SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
+                       
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
                         member_found = true;
+                        ErrorLabel.Visibility = Visibility.Hidden;
                         break;
                     }
                 }
                 if (!member_found)
                 {
-                   (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Clear();
+                    (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Clear();
 
                     ErrorLabel.Visibility = Visibility.Visible;
                 }
@@ -109,22 +110,33 @@ namespace DraftGotoGro
             {
                 var members = _memberCollection.Find(_ => true).ToList();
                 var member_found = false;
-
+                SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
 
                 foreach (Member m in members)
                 {
-                    if (m.Name.ToString() == SearchTextBox.Text)
+                    if (m.Name.ToString() == SearchTextBox.Text || m.Name.ToString().Contains(SearchTextBox.Text))
                     {
 
-                        SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
+                        
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
                         member_found = true;
+                        ErrorLabel.Visibility = Visibility.Hidden;
                         break;
                     }
+                    //Change to string lower case
+                    /*else if (m.Name.ToString().Contains(SearchTextBox.Text))
+                    {
+
+                        (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
+                        member_found = true;
+                        ErrorLabel.Visibility = Visibility.Hidden;
+                        break;
+                    }*/
                 }
                 if (!member_found)
                 {
                     (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Clear();
+
 
                     ErrorLabel.Visibility = Visibility.Visible;
 
