@@ -25,8 +25,8 @@ namespace DraftGotoGro
             {
                 if (deleteButton.DataContext is Item selectedItem)
                 {
-                    var filter = Builders<Sale>.Filter.Eq("_id", _selectedSale.Id);
-                    var update = Builders<Sale>.Update.PullFilter("Items", Builders<Item>.Filter.Eq("_id", selectedItem.Id));
+                    var filter = Builders<Sale>.Filter.Eq("OrderNumber", _selectedSale.OrderNumber);
+                    var update = Builders<Sale>.Update.PullFilter("Items", Builders<Item>.Filter.Eq("ItemName", selectedItem.ItemName));
 
                     var result = _saleCollection.UpdateOne(filter, update);
 

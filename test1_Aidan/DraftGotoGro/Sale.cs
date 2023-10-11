@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace DraftGotoGro
         public int OrderNumber { get; set; }
         public List<Item> Items { get; set; }
         public DateTime SaleDate { get; set; }
+
+        public int ItemCount { get { return Items.Count; } }
     }
 }

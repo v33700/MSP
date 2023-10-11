@@ -19,8 +19,8 @@
         </Grid.RowDefinitions>
 
         <ComboBox x:Name="SearchTypeComboBox" Width="200" Margin="10" HorizontalAlignment="Left" SelectionChanged="SearchTypeComboBox_SelectionChanged">
-            <ComboBoxItem Content="Member ID" IsSelected="True"/>
-            <ComboBoxItem Content="Order Number"/>
+            <ComboBoxItem Content="MemberID" IsSelected="True"/>
+            <ComboBoxItem Content="OrderNumber"/>
         </ComboBox>
 
         <Grid Margin="10" HorizontalAlignment="Left" Grid.Row="1">
