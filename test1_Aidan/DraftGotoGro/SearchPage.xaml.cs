@@ -24,7 +24,6 @@ namespace DraftGotoGro
             var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
             _database = client.GetDatabase("SWE"); // database name
             _memberCollection = _database.GetCollection<Member>("Members");
-          
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -79,7 +78,6 @@ namespace DraftGotoGro
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Item Count", Binding = new Binding("ItemCount") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Date", Binding = new Binding("Date") });
             }
-
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -90,12 +88,10 @@ namespace DraftGotoGro
                 var members = _memberCollection.Find(_ => true).ToList();
                 var member_found = false;
                 
-
                 foreach (Member m in members) 
                 {
                     if (m.Id.ToString() == SearchTextBox.Text) 
-                    {
-                        
+                    { 
                         SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
                         member_found = true;
@@ -107,10 +103,7 @@ namespace DraftGotoGro
                    (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Clear();
 
                     ErrorLabel.Visibility = Visibility.Visible;
-
                 }
-                
-
             }
             else if(((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search by Name")
             {
@@ -139,15 +132,13 @@ namespace DraftGotoGro
             }
             else if ((((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search"))
             {
-                
                 SearchResultsDataGrid.ItemsSource = SaleResult;
                 SearchResultsDataGrid_SelectionChanged(sender, e);
             }
         }
 
         private void SearchResultsDataGrid_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-           
+        { 
             if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search")
             {
                 var selectedSale = (Sale)SearchResultsDataGrid.SelectedItem;
@@ -159,8 +150,6 @@ namespace DraftGotoGro
                 }
                 else
                 {
-                    
-
                     ErrorLabel.Visibility = Visibility.Visible;
                 }
             }

@@ -19,11 +19,11 @@
 
         <TextBox x:Name="MemberIDBox" HorizontalAlignment="Left" Margin="56,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="OrderNumber" HorizontalAlignment="Left" Margin="56,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="ItemID" HorizontalAlignment="Left" Margin="56,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ItemName" HorizontalAlignment="Left" Margin="56,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="ItemQuantity" HorizontalAlignment="Left" Margin="56,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="MemberIDLabel" Content="Member ID&#xD;&#xA;" HorizontalAlignment="Left" Margin="56,74,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
         <Label x:Name="OrderNumberLabel" Content="Order Number&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="56,130,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
-        <Label x:Name="ItemIDBox" Content="Item ID&#xD;&#xA;" HorizontalAlignment="Left" Margin="56,184,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
+        <Label x:Name="ItemNameBox" Content="Item Name&#xA;Item" HorizontalAlignment="Left" Margin="56,184,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
         <Label x:Name="ItemQuantityLabel" Content="Item Quantity" HorizontalAlignment="Left" Margin="56,235,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
         <Label x:Name="SaleErrorLabel" Content="Enter a valid data" HorizontalAlignment="Left" Margin="422,112,0,0" VerticalAlignment="Top" IsEnabled="False" Background="White" Foreground="Red" Visibility="Hidden"/>
 
@@ -31,7 +31,7 @@
         <ListView x:Name="ItemListView" Margin="422,152,0,112" HorizontalAlignment="Left" Width="305">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="150" DisplayMemberBinding="{Binding ItemID}" />
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding ItemName}" />
                     <GridViewColumn Header="Quantity" Width="150" DisplayMemberBinding="{Binding ItemQty}" />
                 </GridView>
             </ListView.View>
