@@ -44,7 +44,20 @@ namespace DraftGotoGro
         {
             SetupDataGridColumns();
             var selectedSearchType = (ComboBoxItem)SearchTypeComboBox.SelectedItem;
-            PlaceholderTextBlock.Text = selectedSearchType.Content.ToString() == "Member Search" ? "Member ID" : "Order Number";
+            /*PlaceholderTextBlock.Text = selectedSearchType.Content.ToString() == "Member Search" ? "Member ID" : "Order Number";*/
+            if(selectedSearchType.Content.ToString()== "Member Search by ID")
+            {
+                PlaceholderTextBlock.Text = "Member ID";
+
+            }
+            else if(selectedSearchType.Content.ToString() == "Member Search by Name")
+            {
+                PlaceholderTextBlock.Text = "Member Name";
+            }
+            else
+            {
+                PlaceholderTextBlock.Text = "Order Number";
+            }
         }
 
         private void SetupDataGridColumns()
@@ -52,7 +65,7 @@ namespace DraftGotoGro
             SearchResultsDataGrid.Columns.Clear();
 
             var selectedSearchType = (ComboBoxItem)SearchTypeComboBox.SelectedItem;
-            if (selectedSearchType.Content.ToString() == "Member Search")
+            if (selectedSearchType.Content.ToString() == "Member Search by ID" || selectedSearchType.Content.ToString() == "Member Search by Name")
             {
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Member ID", Binding = new Binding("Id") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("Name") });
@@ -72,7 +85,7 @@ namespace DraftGotoGro
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             
-            if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search")
+            if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search by ID")
             {
                 var members = _memberCollection.Find(_ => true).ToList();
                 var member_found = false;
@@ -98,6 +111,31 @@ namespace DraftGotoGro
                 }
                 
 
+            }
+            else if(((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search by Name")
+            {
+                var members = _memberCollection.Find(_ => true).ToList();
+                var member_found = false;
+
+
+                foreach (Member m in members)
+                {
+                    if (m.Name.ToString() == SearchTextBox.Text)
+                    {
+
+                        SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
+                        (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
+                        member_found = true;
+                        break;
+                    }
+                }
+                if (!member_found)
+                {
+                    (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Clear();
+
+                    ErrorLabel.Visibility = Visibility.Visible;
+
+                }
             }
             else if ((((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search"))
             {
