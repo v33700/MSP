@@ -12,7 +12,7 @@ namespace DraftGotoGro
             // Set the Title and TextBlocks with Sale Details
             Title = $"Order Number: {sale.OrderNumber}";
             OrderNumberTextBlock.Text = $"Order Number: {sale.OrderNumber}";
-            MemberIdTextBlock.Text = $"Member ID: {sale.MemberID}";
+            MemberIdTextBlock.Text = $"Member ID: {sale._id}";
 
             // Set ItemsListView's ItemsSource to the Items of the Sale.
             ItemsListView.ItemsSource = sale.Items;
