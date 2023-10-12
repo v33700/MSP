@@ -48,6 +48,7 @@ namespace DraftGotoGro
                 _collectionMember.UpdateOne(memberFilter, memberUpdate);
 
                 _collection.InsertOne(newSale);
+                MessageBox.Show("Database has been updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 MemberIDBox.Text = "";
                 OrderNumber.Text = "";
