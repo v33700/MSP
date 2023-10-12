@@ -114,7 +114,7 @@ namespace DraftGotoGro
 
                 foreach (Member m in members)
                 {
-                    if (m.Name.ToString() == SearchTextBox.Text || m.Name.ToString().Contains(SearchTextBox.Text))
+                    if (m.Name.ToString().ToLower() == SearchTextBox.Text || m.Name.ToString().ToLower().Contains(SearchTextBox.Text))
                     {
 
                         
@@ -123,8 +123,7 @@ namespace DraftGotoGro
                         ErrorLabel.Visibility = Visibility.Hidden;
                         break;
                     }
-                    //Change to string lower case
-                    /*else if (m.Name.ToString().Contains(SearchTextBox.Text))
+                   /*else if (m.Name.ToString().Contains(SearchTextBox.Text))
                     {
 
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
