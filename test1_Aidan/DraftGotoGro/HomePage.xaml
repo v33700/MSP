@@ -10,6 +10,6 @@
 
     <Grid>
         <Label Content="Management System " HorizontalAlignment="Center" Height="74" Margin="0,103,0,0" VerticalAlignment="Top" Width="372" FontSize="36" FontWeight="Bold"/>
-        <Label Content="Welcome to the system&#xD;&#xA;you can explore whenever whatever" HorizontalAlignment="Left" Margin="318,252,0,0" VerticalAlignment="Top" Height="90" Width="193" FontSize="16"/>
+        <Label Content="Welcome to the GotoGro Management System&#xD;&#xA;You can update edit members input sales and search for needed info" HorizontalAlignment="Left" Margin="318,252,0,0" VerticalAlignment="Top" Height="90" Width="193" FontSize="16"/>
     </Grid>
 </Page>
