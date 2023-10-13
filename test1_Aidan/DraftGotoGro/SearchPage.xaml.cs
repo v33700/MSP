@@ -123,14 +123,7 @@ namespace DraftGotoGro
                         ErrorLabel.Visibility = Visibility.Hidden;
                         break;
                     }
-                   /*else if (m.Name.ToString().Contains(SearchTextBox.Text))
-                    {
-
-                        (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
-                        member_found = true;
-                        ErrorLabel.Visibility = Visibility.Hidden;
-                        break;
-                    }*/
+                
                 }
                 if (!member_found)
                 {
