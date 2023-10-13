@@ -11,7 +11,7 @@ namespace DraftGotoGro
     public partial class RefundPage : Page
     {
         private IMongoDatabase _database;
-        private IMongoCollection<Sale> _saleCollection;
+        private IMongoCollection<Sale> _saleCollection; 
 
         public RefundPage()
         {

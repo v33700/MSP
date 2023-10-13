@@ -21,25 +21,24 @@ namespace DraftGotoGro
 
         private void RefundButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button deleteButton)
+            if (ItemsListView.SelectedItem is Item selectedItem)
             {
-                if (deleteButton.DataContext is Item selectedItem)
+                var filter = Builders<Sale>.Filter.Eq("OrderNumber", _selectedSale.OrderNumber);
+                var update = Builders<Sale>.Update.PullFilter("Items", Builders<Item>.Filter.Eq("ItemName", selectedItem.ItemName));
+
+                var result = _saleCollection.UpdateOne(filter, update);
+
+                if (result.IsAcknowledged && result.ModifiedCount > 0)
                 {
-                    var filter = Builders<Sale>.Filter.Eq("OrderNumber", _selectedSale.OrderNumber);
-                    var update = Builders<Sale>.Update.PullFilter("Items", Builders<Item>.Filter.Eq("ItemName", selectedItem.ItemName));
-
-                    var result = _saleCollection.UpdateOne(filter, update);
-
-                    if (result.IsAcknowledged && result.ModifiedCount > 0)
-                    {
-                        _selectedSale.Items.Remove(selectedItem);
-                        ItemsListView.Items.Refresh();
-                        MessageBox.Show("Item refunded successfully.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to refund the item.");
-                    }
+                    // Remove the item from the selectedSale and refresh the ListView
+                    _selectedSale.Items.Remove(selectedItem);
+                    ItemsListView.Items.Refresh();
+                    MessageBox.Show("Item refunded successfully.");
+                    this.Close(); //close the window
+                }
+                else
+                {
+                    MessageBox.Show("Failed to refund the item.");
                 }
             }
         }
