@@ -71,7 +71,7 @@ namespace DraftGotoGro
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Phone Number", Binding = new Binding("PhoneNumber") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Address", Binding = new Binding("Address") });
             }
-            else
+            else if(selectedSearchType.Content.ToString() == "Sale Search")
             {
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Order Number", Binding = new Binding("OrderNumber") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Member ID", Binding = new Binding("MemberId") });
@@ -143,8 +143,26 @@ namespace DraftGotoGro
             }
             else if ((((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search"))
             {
-                SearchResultsDataGrid.ItemsSource = SaleResult;
-                SearchResultsDataGrid_SelectionChanged(sender, e);
+                var sales = _database.GetCollection<Sale>("Sales").Find(_ => true).ToList();
+                var sale_found = false;
+                SearchResultsDataGrid.ItemsSource = new ObservableCollection<Sale>();
+
+                foreach (Sale s in sales)
+                {
+                    if (s.OrderNumber.ToString() == SearchTextBox.Text || s.OrderNumber.ToString().Contains(SearchTextBox.Text))
+                    {
+                        (SearchResultsDataGrid.ItemsSource as ObservableCollection<Sale>).Add(s);
+                        sale_found = true;
+                        ErrorLabel.Visibility = Visibility.Hidden;
+                        break;
+                    }
+                }
+
+                if (!sale_found)
+                {
+                    (SearchResultsDataGrid.ItemsSource as ObservableCollection<Sale>).Clear();
+                    ErrorLabel.Visibility = Visibility.Visible;
+                }
             }
         }
 
