@@ -29,15 +29,24 @@ namespace DraftGotoGro
 
             // Extract the header from the keys of the first dictionary
             var header = data[0].Keys;
-            csvContent.AppendLine(string.Join(",", header));
+            csvContent.AppendLine(string.Join(",", header.Select(Escape)));
 
             foreach (var record in data)
             {
-                var line = string.Join(",", record.Values.Select(v => v.ToString()));
+                var line = string.Join(",", record.Values.Select(v => Escape(v.ToString())));
                 csvContent.AppendLine(line);
             }
 
-            File.WriteAllText(filename, csvContent.ToString());
+            File.WriteAllText(filename, csvContent.ToString(), Encoding.UTF8);
+        }
+
+        private string Escape(string s)
+        {
+            if (s.Contains(',') || s.Contains('"') || s.Contains('\n'))
+            {
+                return $"\"{s.Replace("\"", "\"\"")}\"";
+            }
+            return s;
         }
 
     }

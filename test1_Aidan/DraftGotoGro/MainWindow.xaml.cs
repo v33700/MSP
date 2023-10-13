@@ -12,6 +12,8 @@ namespace DraftGotoGro
         RefundPage refund1 = new RefundPage();
         SearchPage search1 = new SearchPage();
 
+        //Database _database = new Database("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/");
+
         public MainWindow()
         {
             InitializeComponent();

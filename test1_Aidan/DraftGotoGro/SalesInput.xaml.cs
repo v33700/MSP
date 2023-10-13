@@ -29,6 +29,7 @@ namespace DraftGotoGro
         }
         private void SubmitButtons(object sender, RoutedEventArgs e)
         {
+
             if (validatePage()) 
             {
                 Sale newSale = new Sale();
@@ -41,33 +42,35 @@ namespace DraftGotoGro
 
                 var memberFilter = Builders<Member>.Filter.Eq(m => m.Id, newSale.MemberID);
 
+
                 var memberUpdate = Builders<Member>.Update.Push(m => m.Sales, newSale);
 
                 _collectionMember.UpdateOne(memberFilter, memberUpdate);
 
                 _collection.InsertOne(newSale);
+                MessageBox.Show("Database has been updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 MemberIDBox.Text = "";
                 OrderNumber.Text = "";
-                ItemID.Text = "";
+                ItemName.Text = "";
                 ItemQuantity.Text = ""; 
 
                 itemList.Clear();
                 ItemListView.Items.Clear(); 
             }
         }
+
         private void AddToOrderButton_Click(object sender, RoutedEventArgs e)
         {
             if (validatePage()) 
             {
                 Item Newitem = new Item();
-                Newitem.ItemID = int.Parse(ItemID.Text);
+                Newitem.ItemName = ItemName.Text;
                 Newitem.ItemQty = int.Parse(ItemQuantity.Text);
 
                 itemList.Add(Newitem);
                 ItemListView.Items.Add(Newitem);
             }
-
         }
 
         private bool validatePage() 
@@ -76,7 +79,7 @@ namespace DraftGotoGro
 
             bool valid = int.TryParse(OrderNumber.Text, out _); 
 
-            if (MemberIDBox.Text == "" || OrderNumber.Text == "" || ItemID.Text == "" || ItemQuantity.Text == "")
+            if (MemberIDBox.Text == "" || OrderNumber.Text == "" || ItemName.Text == "" || ItemQuantity.Text == "")
             {
                 SaleErrorLabel.Content = "Please fill all the data.";
                 SaleErrorLabel.Visibility = Visibility.Visible;
@@ -88,12 +91,12 @@ namespace DraftGotoGro
                 SaleErrorLabel.Visibility = Visibility.Visible;
                 return isValid;
             }
-            if (!int.TryParse(ItemID.Text, out _))
-            {
-                SaleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
-                SaleErrorLabel.Visibility = Visibility.Visible;
-                return isValid;
-            }
+            //if (!int.TryParse(ItemName.Text, out _))
+            //{
+            //    SaleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
+            //    SaleErrorLabel.Visibility = Visibility.Visible;
+            //    return isValid;
+            //}
             if (!int.TryParse(ItemQuantity.Text, out _))
             {
                 SaleErrorLabel.Content = "Item Quantity is not of a valid format. Please try again.";
@@ -122,11 +125,11 @@ namespace DraftGotoGro
                 SaleErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
-            pattern = "^d{3}"; //3 numbers
-            isMatch = Regex.IsMatch(ItemID.Text, pattern);
+            pattern = "^[a-zA-Z0-9]"; //alphanumeric
+            isMatch = Regex.IsMatch(ItemName.Text, pattern);
             if (!isMatch)
             {
-                SaleErrorLabel.Content = "Item ID is not of a valid format. Please try again.";
+                SaleErrorLabel.Content = "Item Name is not of a valid format. Please try again.";
                 SaleErrorLabel.Visibility = Visibility.Visible;
                 return;
             }
@@ -140,5 +143,4 @@ namespace DraftGotoGro
             }
         }
     }
-
 }

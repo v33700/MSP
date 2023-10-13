@@ -18,7 +18,8 @@
 
         <!-- ComboBox for Selection Type -->
         <ComboBox x:Name="SearchTypeComboBox" Width="200" HorizontalAlignment="Left" Margin="10" Grid.Row="0" SelectionChanged="SearchTypeComboBox_SelectionChanged" IsEditable="True" IsReadOnly="True" Text="Please Select">
-            <ComboBoxItem Content="Member Search"/>
+            <ComboBoxItem Content="Member Search by ID"/>
+            <ComboBoxItem Content="Member Search by Name"/>
             <ComboBoxItem Content="Sale Search"/>
         </ComboBox>
 
