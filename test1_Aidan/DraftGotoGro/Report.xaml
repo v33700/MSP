@@ -11,7 +11,7 @@
     <!-- Loaded="Page_Loaded"> -->
 
     <Grid>
-        <Border Margin="100,180,100,0" Padding="5" BorderBrush="SteelBlue" BorderThickness="5" CornerRadius="10"
+        <Border Margin="100,75,100,0" Padding="5" BorderBrush="SteelBlue" BorderThickness="5" CornerRadius="10"
         VerticalAlignment="Top">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -27,7 +27,7 @@
             </Grid>
         </Border>
 
-        <Border Margin="100" Padding="5" BorderBrush="SteelBlue" BorderThickness="5" CornerRadius="10"
+        <Border Margin="100, 150, 100, 0" Padding="5" BorderBrush="SteelBlue" BorderThickness="5" CornerRadius="10"
           VerticalAlignment="Top">
             <StackPanel HorizontalAlignment="Left" Height="75" Margin="0,0,0,0" VerticalAlignment="Top" Width="550">
                 <StackPanel Orientation="Horizontal" Width="305" Margin="25,25,0,0" HorizontalAlignment="Left">
@@ -36,7 +36,7 @@
                     <TextBlock Text="To: " VerticalAlignment="Center" Margin="20,0,10,0"/>
                     <DatePicker x:Name="ToDate" />
                 </StackPanel>
-                <Button Content="Sale Report" Width="150" Height="50" Margin="0,-35,20,0" x:Name="SaleReportBtn" HorizontalAlignment="Right" Click="SaleReportBtn_Click"/>
+                <Button Content="Sale Report" Width="150" Height="50" Margin="0,-35,0,0" x:Name="SaleReportBtn" HorizontalAlignment="Right" Click="SaleReportBtn_Click"/>
             </StackPanel>
         </Border>
 

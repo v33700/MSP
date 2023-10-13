@@ -114,7 +114,7 @@ namespace DraftGotoGro
 
                 foreach (Member m in members)
                 {
-                    if (m.Name.ToString().ToLower() == SearchTextBox.Text || m.Name.ToString().ToLower().Contains(SearchTextBox.Text))
+                    if (m.Name.ToString() == SearchTextBox.Text || m.Name.ToString().Contains(SearchTextBox.Text))
                     {
 
                         
