@@ -146,9 +146,7 @@ namespace DraftGotoGro
                     Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
                     dlg.FileName = "Document"; 
                     dlg.DefaultExt = ".csv"; 
-                    dlg.Filter = "CSV documents (.csv)|*.csv";
-
-                    // Show save file dialog box
+                    dlg.Filter = "CSV documents (.csv)|*.csv";                 
                     bool? dialogResult = dlg.ShowDialog();
                                      
                     if (dialogResult == true)

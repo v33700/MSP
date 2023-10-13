@@ -43,7 +43,7 @@ namespace DraftGotoGro
         {
             SetupDataGridColumns();
             var selectedSearchType = (ComboBoxItem)SearchTypeComboBox.SelectedItem;
-            /*PlaceholderTextBlock.Text = selectedSearchType.Content.ToString() == "Member Search" ? "Member ID" : "Order Number";*/
+            /*PlaceholderTextBlock.Text = selectedSearchType.Content.ToString() == "Member Search" ? "Member ID" : "Order Number";*/ 
             if(selectedSearchType.Content.ToString()== "Member Search by ID")
             {
                 PlaceholderTextBlock.Text = "Member ID";
