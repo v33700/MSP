@@ -13,13 +13,12 @@ namespace DraftGotoGro
 
         public CSVGEN(string jsonData)
         {
-            data = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(jsonData);
-
+            data = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(jsonData) ?? new List<Dictionary<string, object>>();
         }
 
         public void ToCsv(string filename)
         {
-            if (data == null || !data.Any())
+            if (!data.Any())
             {
                 System.Console.WriteLine("No data provided!");
                 return;
@@ -28,12 +27,20 @@ namespace DraftGotoGro
             StringBuilder csvContent = new StringBuilder();
 
             // Extract the header from the keys of the first dictionary
-            var header = data[0].Keys;
+            var firstRecord = data.FirstOrDefault(d => d != null);
+            if (firstRecord == null)
+            {
+                System.Console.WriteLine("No valid records provided!");
+                return;
+            }
+
+            var header = firstRecord.Keys.Where(k => k != null);
             csvContent.AppendLine(string.Join(",", header.Select(Escape)));
 
             foreach (var record in data)
             {
-                var line = string.Join(",", record.Values.Select(v => Escape(v.ToString())));
+                if (record == null) continue;
+                var line = string.Join(",", record.Values.Where(v => v != null).Select(v => Escape(v.ToString())));
                 csvContent.AppendLine(line);
             }
 
@@ -48,9 +55,8 @@ namespace DraftGotoGro
             }
             return s;
         }
-
+        //string jsonData = returned database data
+        // CSVGEN csvGenerator = new CSVGEN(jsonData);
+        //csvGenerator.ToCsv("output.csv");
     }
-    //string jsonData = returned database data
-    // CSVGEN csvGenerator = new CSVGEN(jsonData);
-    //csvGenerator.ToCsv("output.csv");
 }
