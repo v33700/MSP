@@ -45,7 +45,7 @@ namespace DraftGotoGro
         {
             SetupDataGridColumns();
             var selectedSearchType = (ComboBoxItem)SearchTypeComboBox.SelectedItem;
-            /*PlaceholderTextBlock.Text = selectedSearchType.Content.ToString() == "Member Search" ? "Member ID" : "Order Number";*/
+            /*PlaceholderTextBlock.Text = selectedSearchType.Content.ToString() == "Member Search" ? "Member ID" : "Order Number";*/ 
             if(selectedSearchType.Content.ToString()== "Member Search by ID")
             {
                 PlaceholderTextBlock.Text = "Member ID";
@@ -117,7 +117,7 @@ namespace DraftGotoGro
 
                 foreach (Member m in members)
                 {
-                    if (m.Name.ToString().ToLower() == SearchTextBox.Text || m.Name.ToString().ToLower().Contains(SearchTextBox.Text))
+                    if (m.Name.ToString() == SearchTextBox.Text || m.Name.ToString().Contains(SearchTextBox.Text))
                     {
 
                         
