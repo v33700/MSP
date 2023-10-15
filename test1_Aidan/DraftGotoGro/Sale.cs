@@ -11,7 +11,7 @@ namespace DraftGotoGro
 {
     public class Sale
     {
-        [JsonIgnore]
+        /*[JsonIgnore]*/
         public ObjectId _id { get; set; }
         public int MemberID { get; set; }
         public int OrderNumber { get; set; }

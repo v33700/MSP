@@ -15,6 +15,7 @@ namespace DraftGotoGro
 
         private IMongoDatabase _database;
         private IMongoCollection<Member> _memberCollection;
+        private IMongoCollection<Sale> _saleCollection;
        
 
         public SearchPage()
@@ -24,6 +25,7 @@ namespace DraftGotoGro
             var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
             _database = client.GetDatabase("SWE"); // database name
             _memberCollection = _database.GetCollection<Member>("Members");
+            _saleCollection = _database.GetCollection<Sale>("Sales");
         }
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -73,10 +75,11 @@ namespace DraftGotoGro
             }
             else if(selectedSearchType.Content.ToString() == "Sale Search")
             {
+                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Member ID", Binding = new Binding("MemberID") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Order Number", Binding = new Binding("OrderNumber") });
-                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Member ID", Binding = new Binding("MemberId") });
-                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Item Count", Binding = new Binding("ItemCount") });
-                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Date", Binding = new Binding("Date") });
+                
+                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Item Count", Binding = new Binding("Items") });
+                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Date", Binding = new Binding("SaleDate") });
             }
         }
 
@@ -136,7 +139,7 @@ namespace DraftGotoGro
             }
             else if ((((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search"))
             {
-                var sales = _database.GetCollection<Sale>("Sales").Find(_ => true).ToList();
+                var sales = _saleCollection.Find(_ => true).ToList();
                 var sale_found = false;
                 SearchResultsDataGrid.ItemsSource = new ObservableCollection<Sale>();
 
