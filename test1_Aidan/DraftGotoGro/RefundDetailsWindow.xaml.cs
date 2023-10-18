@@ -30,11 +30,10 @@ namespace DraftGotoGro
 
                 if (result.IsAcknowledged && result.ModifiedCount > 0)
                 {
-                    // Remove the item from the selectedSale and refresh the ListView
                     _selectedSale.Items.Remove(selectedItem);
                     ItemsListView.Items.Refresh();
                     MessageBox.Show("Item refunded successfully.");
-                    this.Close(); //close the window
+                    this.Close(); 
                 }
                 else
                 {
