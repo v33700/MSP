@@ -32,7 +32,7 @@
 
         <Button x:Name="SearchButton" Content="Search" Width="200" Margin="10" HorizontalAlignment="Left" Grid.Row="2" Click="SearchButton_Click"/>
 
-        <DataGrid x:Name="SalesDataGrid" Grid.Row="3" AutoGenerateColumns="False" Margin="10" SelectionChanged="SalesDataGrid_SelectionChanged">
+        <DataGrid x:Name="SalesDataGrid" Grid.Row="3" AutoGenerateColumns="False" Margin="10" SelectionChanged="SalesDataGrid_SelectionChanged" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Order Number" Binding="{Binding OrderNumber}"/>
                 <DataGridTextColumn Header="Member ID" Binding="{Binding MemberID}"/>

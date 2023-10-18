@@ -13,13 +13,6 @@
                 <GridView>
                     <GridViewColumn Header="Item Name" DisplayMemberBinding="{Binding ItemName}" Width="120"/>
                     <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding ItemQty}" Width="50"/>
-                    <GridViewColumn Header="Select" Width="50">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

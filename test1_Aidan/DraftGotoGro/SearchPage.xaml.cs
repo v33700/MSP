@@ -43,9 +43,14 @@ namespace DraftGotoGro
 
         private void SearchTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Hint.Visibility = Visibility.Hidden;
+            ErrorLabel.Visibility = Visibility.Hidden;
+            SearchTextBox.Text = string.Empty;
+
+
             SetupDataGridColumns();
             var selectedSearchType = (ComboBoxItem)SearchTypeComboBox.SelectedItem;
-            /*PlaceholderTextBlock.Text = selectedSearchType.Content.ToString() == "Member Search" ? "Member ID" : "Order Number";*/ 
+
             if(selectedSearchType.Content.ToString()== "Member Search by ID")
             {
                 PlaceholderTextBlock.Text = "Member ID";
@@ -78,7 +83,7 @@ namespace DraftGotoGro
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Member ID", Binding = new Binding("MemberID") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Order Number", Binding = new Binding("OrderNumber") });
                 
-                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Item Count", Binding = new Binding("Items") });
+                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Item Count", Binding = new Binding("ItemCount") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Date", Binding = new Binding("SaleDate") });
             }
         }
@@ -150,6 +155,7 @@ namespace DraftGotoGro
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Sale>).Add(s);
                         sale_found = true;
                         ErrorLabel.Visibility = Visibility.Hidden;
+                        Hint.Visibility = Visibility.Visible;
                         break;
                     }
                 }
@@ -157,13 +163,15 @@ namespace DraftGotoGro
                 if (!sale_found)
                 {
                     (SearchResultsDataGrid.ItemsSource as ObservableCollection<Sale>).Clear();
+                    Hint.Visibility = Visibility.Hidden;
                     ErrorLabel.Visibility = Visibility.Visible;
                 }
             }
         }
 
         private void SearchResultsDataGrid_SelectionChanged(object sender, RoutedEventArgs e)
-        { 
+        {
+
             if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Sale Search")
             {
                 var selectedSale = (Sale)SearchResultsDataGrid.SelectedItem;

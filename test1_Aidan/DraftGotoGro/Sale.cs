@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace DraftGotoGro
 {
@@ -17,6 +18,8 @@ namespace DraftGotoGro
         public int OrderNumber { get; set; }
         public List<Item> Items { get; set; }
         public DateTime SaleDate { get; set; }
+
+        public int ItemCount { get { return Items.Count; } }
     }
     
 }
