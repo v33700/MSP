@@ -123,13 +123,10 @@ namespace DraftGotoGro
                 foreach (Member m in members)
                 {
                     if (m.Name.ToString() == SearchTextBox.Text || m.Name.ToString().Contains(SearchTextBox.Text))
-                    {
-
-                        
+                    {   
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
                         member_found = true;
                         ErrorLabel.Visibility = Visibility.Hidden;
-                        break;
                     }
                 
                 }
@@ -150,7 +147,7 @@ namespace DraftGotoGro
 
                 foreach (Sale s in sales)
                 {
-                    if (s.OrderNumber.ToString() == SearchTextBox.Text || s.OrderNumber.ToString().Contains(SearchTextBox.Text))
+                    if (s.OrderNumber.ToString() == SearchTextBox.Text)
                     {
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Sale>).Add(s);
                         sale_found = true;

@@ -19,6 +19,7 @@ namespace DraftGotoGro
         public List<Item> Items { get; set; }
         public DateTime SaleDate { get; set; }
 
+        [JsonIgnore]
         public int ItemCount { get { return Items.Count; } }
     }
     

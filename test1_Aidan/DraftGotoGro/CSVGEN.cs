@@ -55,8 +55,6 @@ namespace DraftGotoGro
             }
             return s;
         }
-        //string jsonData = returned database data
-        // CSVGEN csvGenerator = new CSVGEN(jsonData);
-        //csvGenerator.ToCsv("output.csv");
+
     }
 }

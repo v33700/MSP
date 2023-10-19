@@ -86,7 +86,6 @@ namespace DraftGotoGro
             {
                 string jsonData = JsonSerializer.Serialize(membersFromSales);
                 SaveToFile(jsonData);
-                MessageBox.Show("CSV has been successfully saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
         }
@@ -113,7 +112,6 @@ namespace DraftGotoGro
 
                 string jsonData = JsonSerializer.Serialize(salesWithinDates);
                 SaveToFile(jsonData);
-                MessageBox.Show("CSV has been successfully saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             else

@@ -41,16 +41,24 @@ namespace DraftGotoGro
             List<Sale> sales = _saleCollection.Find(_ => true).ToList();
             SalesDataGrid.ItemsSource = new ObservableCollection<Sale>();
 
-            foreach (Sale s in sales)
+            if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member ID")
             {
-                if (s.OrderNumber.ToString() == SearchTextBox.Text)
+                foreach (Sale s in sales)
                 {
-                    (SalesDataGrid.ItemsSource as ObservableCollection<Sale>).Add(s);
-                    break;
+                    if (s.MemberID.ToString() == SearchTextBox.Text)
+                    {
+                        (SalesDataGrid.ItemsSource as ObservableCollection<Sale>).Add(s);
+                    }
                 }
-                else if (s.MemberID.ToString() == SearchTextBox.Text)
-                {
-                    (SalesDataGrid.ItemsSource as ObservableCollection<Sale>).Add(s);
+            }
+            else if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Order Number") 
+            {
+                foreach (Sale s in sales) 
+                { 
+                    if (s.OrderNumber.ToString() == SearchTextBox.Text)
+                    {
+                        (SalesDataGrid.ItemsSource as ObservableCollection<Sale>).Add(s);
+                    }
                 }
             }
 

@@ -52,20 +52,11 @@ namespace DraftGotoGro
             _database = client.GetDatabase("SWE"); // database name
             _collectionEmployee = _database.GetCollection<Employee>("Employees"); // db collection reference
 
-            //_collectionEmployee.InsertOne(new Employee(3, "ATest", "test", "user", "Password1234", "email@email.com", 1234567890, new DateTime(2000, 01, 01))); // <---- change this to add someone to the DB (Yes, this is awful.)
-
             var filter = Builders<Employee>.Filter.Empty; // retrieve all documents in the collection
-
             var projection = Builders<Employee>.Projection.Exclude("_id"); // exclude the _id field
+            employees = _collectionEmployee.Find(filter).Project<Employee>(projection).ToList();
 
-            var employeeDocuments = _collectionEmployee.Find(filter).Project<Employee>(projection).ToList();
-
-            foreach (var employeeDocument in employeeDocuments)
-            {
-                employees.Add(employeeDocument);
-            }
-
-            myParent = win;
+            myParent = win; 
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -107,7 +98,7 @@ namespace DraftGotoGro
                 if (usernameFound)
                 {
                     passwordCorrect = (passwordBox.Password.ToString() == em.password);
-                    continue;
+                    break;
                 }
             }
 
@@ -136,8 +127,8 @@ namespace DraftGotoGro
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            myParent.PageContent.Content = new HomePage(); 
-            myParent.ShowNavigation();
+            //myParent.PageContent.Content = new HomePage(); 
+            //myParent.ShowNavigation();
         }
     }
 }

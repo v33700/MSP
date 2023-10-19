@@ -1,10 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows;
-using System.Diagnostics;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Linq;
+
 
 namespace DraftGotoGro
 {
@@ -96,7 +95,17 @@ namespace DraftGotoGro
 
             if (member != null)
             {
-                SaveOrUpdateMember(member);
+                if (member.Name != null && member.Address != null && member.PhoneNumber != null) 
+                {
+                    SaveOrUpdateMember(member);
+                    MessageBox.Show("Member successfully Saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else 
+                {
+                    MessageBox.Show("Please Enter all Member Information");
+                }
+
+
             }
             else
             {
@@ -134,12 +143,14 @@ namespace DraftGotoGro
                 var update = Builders<Member>.Update
                     .Set(m => m.Name, member.Name)
                     .Set(m => m.PhoneNumber, member.PhoneNumber)
-                    .Set(m => m.Address, member.Address);
+                    .Set(m => m.Address, member.Address)
+                    .Set(m => m.Sales, member.Sales); 
 
                 _collection.UpdateOne(filter, update);
             }
             else
             {
+                member.Sales.Add(new Sale() { MemberID = member.Id });
                 _collection.InsertOne(member);
             }
         }
