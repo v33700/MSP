@@ -40,7 +40,7 @@
 
             <DataGrid.Columns>
                 <!-- New ID column -->
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding _id}" Width="Auto"/>
 
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                 <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Width="*"/>

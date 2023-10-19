@@ -73,7 +73,7 @@ namespace DraftGotoGro
             var selectedSearchType = (ComboBoxItem)SearchTypeComboBox.SelectedItem;
             if (selectedSearchType.Content.ToString() == "Member Search by ID" || selectedSearchType.Content.ToString() == "Member Search by Name")
             {
-                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Member ID", Binding = new Binding("Id") });
+                SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Member ID", Binding = new Binding("_id") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Name", Binding = new Binding("Name") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Phone Number", Binding = new Binding("PhoneNumber") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Address", Binding = new Binding("Address") });
