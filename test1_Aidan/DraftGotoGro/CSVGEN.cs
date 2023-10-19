@@ -1,60 +1,76 @@
-﻿using System.Collections.Generic;
+﻿using DraftGotoGro;
+using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System.Linq;
 using System.Text;
-using ThirdParty.Json.LitJson;
+using System.Text.Json;
 
-namespace DraftGotoGro
+internal class CSVGEN
 {
-    internal class CSVGEN
+    private List<CombinedData> combinedData;
+    private List<Sale> salesData;
+
+    private class CombinedData
     {
-        private List<Dictionary<string, object>> data;
+        public Member Member { get; set; }
+        public List<Sale> Sales { get; set; }
+    }
 
-        public CSVGEN(string jsonData)
+    // Constructor for combined data
+    public CSVGEN(string jsonData, bool isCombined)
+    {
+        if (isCombined)
         {
-            data = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(jsonData) ?? new List<Dictionary<string, object>>();
+            combinedData = JsonSerializer.Deserialize<List<CombinedData>>(jsonData) ?? new List<CombinedData>();
+        }
+        else
+        {
+            salesData = JsonSerializer.Deserialize<List<Sale>>(jsonData) ?? new List<Sale>();
+        }
+    }
+
+    public void ToCsv(string filename)
+    {
+        StringBuilder csvContent = new StringBuilder();
+
+        if (combinedData != null && combinedData.Any()) // Handling combined data
+        {
+            var memberHeaders = new List<string> { "_id", "Name", "PhoneNumber", "Address" };
+            var saleHeader = "Sales";
+            csvContent.AppendLine(string.Join(",", memberHeaders) + "," + saleHeader);
+
+            foreach (var record in combinedData)
+            {
+                var member = record.Member;
+                var memberValues = memberHeaders.Select(h => member.GetType().GetProperty(h)?.GetValue(member)?.ToString() ?? "").ToList();
+                var salesValue = JsonSerializer.Serialize(record.Sales);
+                csvContent.AppendLine(string.Join(",", memberValues) + "," + salesValue);
+            }
+        }
+        else if (salesData != null && salesData.Any()) // Handling only sales data
+        {
+            var saleHeaders = new List<string> { "MemberID", "OrderNumber", "Items", "SaleDate" };
+            csvContent.AppendLine(string.Join(",", saleHeaders));
+
+            foreach (var sale in salesData)
+            {
+                var values = saleHeaders.Select(h =>
+                {
+                    if (h == "Items")
+                    {
+                        return JsonSerializer.Serialize(sale.Items);
+                    }
+                    return sale.GetType().GetProperty(h)?.GetValue(sale)?.ToString() ?? "";
+                }).ToList();
+                csvContent.AppendLine(string.Join(",", values));
+            }
+        }
+        else
+        {
+            System.Console.WriteLine("No data provided!");
+            return;
         }
 
-        public void ToCsv(string filename)
-        {
-            if (!data.Any())
-            {
-                System.Console.WriteLine("No data provided!");
-                return;
-            }
-
-            StringBuilder csvContent = new StringBuilder();
-
-            // Extract the header from the keys of the first dictionary
-            var firstRecord = data.FirstOrDefault(d => d != null);
-            if (firstRecord == null)
-            {
-                System.Console.WriteLine("No valid records provided!");
-                return;
-            }
-
-            var header = firstRecord.Keys.Where(k => k != null);
-            csvContent.AppendLine(string.Join(",", header.Select(Escape)));
-
-            foreach (var record in data)
-            {
-                if (record == null) continue;
-                var line = string.Join(",", record.Values.Where(v => v != null).Select(v => Escape(v.ToString())));
-                csvContent.AppendLine(line);
-            }
-
-            File.WriteAllText(filename, csvContent.ToString(), Encoding.UTF8);
-        }
-
-        private string Escape(string s)
-        {
-            if (s.Contains(',') || s.Contains('"') || s.Contains('\n'))
-            {
-                return $"\"{s.Replace("\"", "\"\"")}\"";
-            }
-            return s;
-        }
-
+        File.WriteAllText(filename, csvContent.ToString(), Encoding.UTF8);
     }
 }

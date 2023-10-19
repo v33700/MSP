@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static MongoDB.Bson.Serialization.Serializers.SerializerHelper;
 using System.Text.Json;
+using System.Reflection;
 
 namespace DraftGotoGro
 {
@@ -47,51 +48,50 @@ namespace DraftGotoGro
         private void MemberReportBtn_Click(object sender, RoutedEventArgs e)
         {
             List<Member> membersFromSales = null;
-            var projection = Builders<Member>.Projection.Exclude("_id");
+            List<object> combinedData = new List<object>(); // List to store combined member and sales data
+
+            FilterDefinition<Sale> filter = null;
 
             if (WeekRadio.IsChecked == true)
             {
                 DateTime oneWeekAgo = DateTime.UtcNow.AddDays(-7);
-
-                var filter = Builders<Sale>.Filter.Gte(s => s.SaleDate, oneWeekAgo);
-                var sales = _saleCollection.Find(filter).ToList();
-
-                var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
-
-                var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
-                membersFromSales = _memberCollection.Find(memberFilter).Project<Member>(projection).ToList();
+                filter = Builders<Sale>.Filter.Gte(s => s.SaleDate, oneWeekAgo);
             }
             else if (MonthRadio.IsChecked == true)
             {
                 DateTime oneMonthAgo = DateTime.UtcNow.AddDays(-30);
-
-                var filter = Builders<Sale>.Filter.Gte(s => s.SaleDate, oneMonthAgo);
-                var sales = _saleCollection.Find(filter).ToList();
-                var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
-
-                var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
-                membersFromSales = _memberCollection.Find(memberFilter).Project<Member>(projection).ToList();
+                filter = Builders<Sale>.Filter.Gte(s => s.SaleDate, oneMonthAgo);
             }
             else if (AllRadio.IsChecked == true)
             {
-                var sales = _saleCollection.Find(_ => true).ToList();
-
-                var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
-
-                var memberFilter = Builders<Member>.Filter.In(m => m.Id, uniqueMemberIds);
-                membersFromSales = _memberCollection.Find(memberFilter).Project<Member>(projection).ToList();
+                filter = Builders<Sale>.Filter.Empty; // This will match all documents in the collection
             }
 
-            if (membersFromSales != null)
+            if (filter != null)
             {
-                string jsonData = JsonSerializer.Serialize(membersFromSales);
-                SaveToFile(jsonData);
+                var sales = _saleCollection.Find(filter).ToList();
+                var uniqueMemberIds = sales.Select(s => s.MemberID).Distinct().ToList();
+                var memberFilter = Builders<Member>.Filter.In(m => m._id, uniqueMemberIds);
+                membersFromSales = _memberCollection.Find(memberFilter).ToList();
+
+                foreach (var member in membersFromSales)
+                {
+                    var memberSales = sales.Where(s => s.MemberID == member._id).ToList();
+                    combinedData.Add(new
+                    {
+                        Member = member,
+                        Sales = memberSales
+                    });
+                }
+                string jsonData = JsonSerializer.Serialize(combinedData);
+                SaveToFile(jsonData, true);  // Pass true for combined data
 
             }
         }
+
+
         private void SaleReportBtn_Click(object sender, RoutedEventArgs e)
         {
-
             if (FromDate.SelectedDate.HasValue && ToDate.SelectedDate.HasValue)
             {
                 DateTime startDate = FromDate.SelectedDate.Value;
@@ -103,31 +103,38 @@ namespace DraftGotoGro
                     return;
                 }
 
-                var filter = Builders<Sale>.Filter.And(
+                var defaultFilter = Builders<Sale>.Filter.And(
+                    Builders<Sale>.Filter.Ne(s => s.MemberID, 0),
+                    Builders<Sale>.Filter.Ne(s => s.SaleDate, new DateTime(0001, 01, 01))
+                );
+
+                var dateFilter = Builders<Sale>.Filter.And(
                     Builders<Sale>.Filter.Gte(s => s.SaleDate, startDate),
-                    Builders<Sale>.Filter.Lte(s => s.SaleDate, endDate));
+                    Builders<Sale>.Filter.Lte(s => s.SaleDate, endDate)
+                );
 
-                var projection = Builders<Sale>.Projection.Exclude("_id");
-                var salesWithinDates = _saleCollection.Find(filter).Project<Sale>(projection).ToList();
+                var combinedFilter = Builders<Sale>.Filter.And(defaultFilter, dateFilter);
 
-                string jsonData = JsonSerializer.Serialize(salesWithinDates);
-                SaveToFile(jsonData);
+                var sales = _saleCollection.Find(combinedFilter).ToList();
+                sales.RemoveAll(s => s.MemberID == 0 || s.SaleDate == new DateTime(0001, 01, 01));
 
+                string jsonData = JsonSerializer.Serialize(sales);
+                SaveToFile(jsonData, false);  // Pass false for only sales data
             }
             else
             {
                 MessageBox.Show("Please select both start and end dates.");
             }
-
-
         }
+
+
 
         private string AskForFileName()
         {
             return CsvFileNameTextBox.Text;
         }
 
-        private void SaveToFile(string jsonData)
+        private void SaveToFile(string jsonData, bool isCombined = false)
         {
             string filename = AskForFileName();
             if (string.IsNullOrEmpty(filename))
@@ -142,14 +149,14 @@ namespace DraftGotoGro
                 if (result == MessageBoxResult.Yes)
                 {
                     Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                    dlg.FileName = "Document"; 
-                    dlg.DefaultExt = ".csv"; 
-                    dlg.Filter = "CSV documents (.csv)|*.csv";                 
+                    dlg.FileName = "Document";
+                    dlg.DefaultExt = ".csv";
+                    dlg.Filter = "CSV documents (.csv)|*.csv";
                     bool? dialogResult = dlg.ShowDialog();
-                                     
+
                     if (dialogResult == true)
                     {
-                           filename = dlg.FileName;
+                        filename = dlg.FileName;
                     }
                     else
                     {
@@ -158,14 +165,14 @@ namespace DraftGotoGro
                 }
                 else
                 {
-                    return; 
+                    return;
                 }
             }
-
-            CSVGEN csvGenerator = new CSVGEN(jsonData);
+            CSVGEN csvGenerator = new CSVGEN(jsonData, isCombined);
             csvGenerator.ToCsv(filename);
             MessageBox.Show("CSV has been successfully saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
     }
+
 }
+

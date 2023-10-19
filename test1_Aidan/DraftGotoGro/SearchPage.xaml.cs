@@ -16,7 +16,7 @@ namespace DraftGotoGro
         private IMongoDatabase _database;
         private IMongoCollection<Member> _memberCollection;
         private IMongoCollection<Sale> _saleCollection;
-       
+
 
         public SearchPage()
         {
@@ -51,12 +51,12 @@ namespace DraftGotoGro
             SetupDataGridColumns();
             var selectedSearchType = (ComboBoxItem)SearchTypeComboBox.SelectedItem;
 
-            if(selectedSearchType.Content.ToString()== "Member Search by ID")
+            if (selectedSearchType.Content.ToString() == "Member Search by ID")
             {
                 PlaceholderTextBlock.Text = "Member ID";
 
             }
-            else if(selectedSearchType.Content.ToString() == "Member Search by Name")
+            else if (selectedSearchType.Content.ToString() == "Member Search by Name")
             {
                 PlaceholderTextBlock.Text = "Member Name";
             }
@@ -78,11 +78,11 @@ namespace DraftGotoGro
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Phone Number", Binding = new Binding("PhoneNumber") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Address", Binding = new Binding("Address") });
             }
-            else if(selectedSearchType.Content.ToString() == "Sale Search")
+            else if (selectedSearchType.Content.ToString() == "Sale Search")
             {
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Member ID", Binding = new Binding("MemberID") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Order Number", Binding = new Binding("OrderNumber") });
-                
+
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Item Count", Binding = new Binding("ItemCount") });
                 SearchResultsDataGrid.Columns.Add(new DataGridTextColumn { Header = "Date", Binding = new Binding("SaleDate") });
             }
@@ -90,17 +90,17 @@ namespace DraftGotoGro
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search by ID")
             {
                 var members = _memberCollection.Find(_ => true).ToList();
                 var member_found = false;
                 SearchResultsDataGrid.ItemsSource = new ObservableCollection<Member>();
-                foreach (Member m in members) 
+                foreach (Member m in members)
                 {
-                    if (m.Id.ToString() == SearchTextBox.Text) 
-                    { 
-                       
+                    if (m._id.ToString() == SearchTextBox.Text)
+                    {
+
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
                         member_found = true;
                         ErrorLabel.Visibility = Visibility.Hidden;
@@ -114,7 +114,7 @@ namespace DraftGotoGro
                     ErrorLabel.Visibility = Visibility.Visible;
                 }
             }
-            else if(((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search by Name")
+            else if (((ComboBoxItem)SearchTypeComboBox.SelectedItem).Content.ToString() == "Member Search by Name")
             {
                 var members = _memberCollection.Find(_ => true).ToList();
                 var member_found = false;
@@ -123,12 +123,12 @@ namespace DraftGotoGro
                 foreach (Member m in members)
                 {
                     if (m.Name.ToString() == SearchTextBox.Text || m.Name.ToString().Contains(SearchTextBox.Text))
-                    {   
+                    {
                         (SearchResultsDataGrid.ItemsSource as ObservableCollection<Member>).Add(m);
                         member_found = true;
                         ErrorLabel.Visibility = Visibility.Hidden;
                     }
-                
+
                 }
                 if (!member_found)
                 {
@@ -175,7 +175,7 @@ namespace DraftGotoGro
                 if (selectedSale != null)
                 {
                     var saleDetailsWindow = new SaleDetailsWindow(selectedSale);
-                    
+
                     saleDetailsWindow.Show();
                 }
                 else

@@ -12,7 +12,7 @@ namespace DraftGotoGro
 {
     public partial class SalesInput : Page
     {
-        List<Item> itemList = new List<Item>();  
+        List<Item> itemList = new List<Item>();
 
         private IMongoDatabase _database;
         private IMongoCollection<Sale> _collection;
@@ -29,8 +29,7 @@ namespace DraftGotoGro
         }
         private void SubmitButtons(object sender, RoutedEventArgs e)
         {
-
-            if (validatePage()) 
+            if (validatePage())
             {
                 Sale newSale = new Sale();
                 newSale.MemberID = int.Parse(MemberIDBox.Text);
@@ -38,14 +37,7 @@ namespace DraftGotoGro
                 newSale.Items = itemList;
                 newSale.SaleDate = DateTime.Now;
 
-                //update sales list in the member from the members table with a matching ID
-
-                var memberFilter = Builders<Member>.Filter.Eq(m => m.Id, newSale.MemberID);
-
-
-                var memberUpdate = Builders<Member>.Update.Push(m => m.Sales, newSale);
-
-                _collectionMember.UpdateOne(memberFilter, memberUpdate);
+                // Removed the code that updates the sales list in the member from the members table
 
                 _collection.InsertOne(newSale);
                 MessageBox.Show("Database has been updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -53,16 +45,16 @@ namespace DraftGotoGro
                 MemberIDBox.Text = "";
                 OrderNumber.Text = "";
                 ItemName.Text = "";
-                ItemQuantity.Text = ""; 
+                ItemQuantity.Text = "";
 
                 itemList.Clear();
-                ItemListView.Items.Clear(); 
+                ItemListView.Items.Clear();
             }
         }
 
         private void AddToOrderButton_Click(object sender, RoutedEventArgs e)
         {
-            if (validatePage()) 
+            if (validatePage())
             {
                 Item Newitem = new Item();
                 Newitem.ItemName = ItemName.Text;
@@ -73,11 +65,11 @@ namespace DraftGotoGro
             }
         }
 
-        private bool validatePage() 
+        private bool validatePage()
         {
             bool isValid = false;
 
-            bool valid = int.TryParse(OrderNumber.Text, out _); 
+            bool valid = int.TryParse(OrderNumber.Text, out _);
 
             if (MemberIDBox.Text == "" || OrderNumber.Text == "" || ItemName.Text == "" || ItemQuantity.Text == "")
             {
@@ -85,7 +77,7 @@ namespace DraftGotoGro
                 SaleErrorLabel.Visibility = Visibility.Visible;
                 return isValid;
             }
-            if (!int.TryParse(OrderNumber.Text, out _)) 
+            if (!int.TryParse(OrderNumber.Text, out _))
             {
                 SaleErrorLabel.Content = "Order number is not of a valid format. Please try again.";
                 SaleErrorLabel.Visibility = Visibility.Visible;
@@ -107,7 +99,7 @@ namespace DraftGotoGro
             return true;
         }
 
-        private void regex() 
+        private void regex()
         {
             string pattern = "^[A-Z]{4}d{2}"; //Four capital letters and 2 digit numbers
             bool isMatch = Regex.IsMatch(MemberIDBox.Text, pattern);

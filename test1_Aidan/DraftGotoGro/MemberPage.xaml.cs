@@ -22,7 +22,7 @@ namespace DraftGotoGro
             var client = new MongoClient("mongodb+srv://SWECLASS:IXo4LdFQqKUdJXIr@tomstestcluster.unrd1c2.mongodb.net/"); // MongoDB connection string will add to ppk or pem style key once we know its working
             _database = client.GetDatabase("SWE"); // database name
             _collection = _database.GetCollection<Member>("Members"); // db collection reference
-            
+
             LoadMembersFromDb();
         }
 
@@ -38,8 +38,8 @@ namespace DraftGotoGro
             var membersCollection = MemberDataGrid.ItemsSource as ObservableCollection<Member>;
             if (membersCollection != null)
             {
-                int maxId = membersCollection.Max(member => member.Id);
-                membersCollection.Add(new Member() { Id = maxId + 1 });
+                int maxId = membersCollection.Max(member => member._id);
+                membersCollection.Add(new Member() { _id = maxId + 1 });
             }
         }
 
@@ -95,12 +95,12 @@ namespace DraftGotoGro
 
             if (member != null)
             {
-                if (member.Name != null && member.Address != null && member.PhoneNumber != null) 
+                if (member.Name != null && member.Address != null && member.PhoneNumber != null)
                 {
                     SaveOrUpdateMember(member);
                     MessageBox.Show("Member successfully Saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                else 
+                else
                 {
                     MessageBox.Show("Please Enter all Member Information");
                 }
@@ -125,7 +125,7 @@ namespace DraftGotoGro
 
             if (selectedMember != null)
             {
-                var filter = Builders<Member>.Filter.Eq(m => m.Id, selectedMember.Id);
+                var filter = Builders<Member>.Filter.Eq(m => m._id, selectedMember._id);
                 _collection.DeleteOne(filter);
                 (MemberDataGrid.ItemsSource as ObservableCollection<Member>).Remove(selectedMember);
             }
@@ -133,7 +133,7 @@ namespace DraftGotoGro
 
         public void SaveOrUpdateMember(Member member)
         {
-            var filter = Builders<Member>.Filter.Eq(m => m.Id, member.Id);
+            var filter = Builders<Member>.Filter.Eq(m => m._id, member._id);
 
             // Check if a member with the given ID already exists
             var existingMember = _collection.Find(filter).FirstOrDefault();
@@ -143,14 +143,14 @@ namespace DraftGotoGro
                 var update = Builders<Member>.Update
                     .Set(m => m.Name, member.Name)
                     .Set(m => m.PhoneNumber, member.PhoneNumber)
-                    .Set(m => m.Address, member.Address)
-                    .Set(m => m.Sales, member.Sales); 
+                    .Set(m => m.Address, member.Address);
+
 
                 _collection.UpdateOne(filter, update);
             }
             else
             {
-                member.Sales.Add(new Sale() { MemberID = member.Id });
+                member.Sales.Add(new Sale() { MemberID = member._id });
                 _collection.InsertOne(member);
             }
         }
